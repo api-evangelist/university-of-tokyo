@@ -1,0 +1,41 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "utokyo": "https://da.dl.itc.u-tokyo.ac.jp/portal/ns#",
+    "iiif": "http://iiif.io/api/presentation/3#",
+    "dc": "http://purl.org/dc/terms/",
+    "oai": "http://www.openarchives.org/OAI/2.0/",
+    "@vocab": "https://schema.org/",
+    "Institution": "schema:CollegeOrUniversity",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "foundingDate": "schema:foundingDate",
+    "logo": "schema:logo",
+    "DigitalArchive": "utokyo:DigitalArchive",
+    "Collection": "schema:Collection",
+    "Manifest": "iiif:Manifest",
+    "Image": "schema:ImageObject",
+    "Repository": "utokyo:Repository",
+    "Record": {
+      "@id": "oai:record",
+      "@type": "schema:CreativeWork"
+    },
+    "identifier": "dc:identifier",
+    "title": "dc:title",
+    "creator": "dc:creator",
+    "subject": "dc:subject",
+    "publisher": "dc:publisher",
+    "date": "dc:date",
+    "type": "dc:type",
+    "format": "dc:format",
+    "language": "dc:language",
+    "rights": "dc:rights",
+    "metadataFormat": "oai:metadataPrefix"
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "University of Tokyo",
+  "url": "https://www.u-tokyo.ac.jp/en/",
+  "foundingDate": "1877",
+  "description": "Japan's leading national research university. Public machine-readable interfaces include the UTokyo Academic Assets Archives IIIF Digital Archive Portal and the UTokyo Repository OAI-PMH metadata harvesting endpoint."
+}
