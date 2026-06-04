@@ -1,0 +1,91 @@
+---
+aid: university-of-tokyo
+name: University of Tokyo
+description: >-
+  The University of Tokyo (UTokyo) is Japan's leading national research
+  university, founded in 1877 and ranked #29 in the QS World University
+  Rankings 2025. Its public, machine-readable developer footprint is centered
+  on its library and digital humanities infrastructure rather than a unified
+  developer portal. Confirmed public APIs include the UTokyo Academic Assets
+  Archives (utda) Digital Archive Portal, which exposes IIIF-compliant image
+  and presentation APIs plus downloadable IIIF Collections and JSON-LD/RDF
+  metadata datasets, and the UTokyo Repository (WEKO) institutional repository,
+  which offers an OAI-PMH 2.0 metadata harvesting endpoint. No general-purpose,
+  authenticated REST developer program (course/SIS/timetable APIs) was found
+  publicly documented.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/university-of-tokyo/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Japan
+  - Research
+  - Library
+  - Digital Archives
+  - IIIF
+  - Open Data
+  - OAI-PMH
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: university-of-tokyo:digital-archive-iiif
+    name: UTokyo Digital Archive Portal (IIIF)
+    description: >-
+      The University of Tokyo Academic Assets Archives shared server publishes
+      digitized collections via the International Image Interoperability
+      Framework (IIIF). IIIF Image and Presentation APIs (manifests and
+      collections) are exposed, alongside downloadable datasets containing IIIF
+      Collections, table-format metadata (CSV/Excel), RDF/JSON-LD, and TEI/XML
+      text. API documentation is published (in Japanese) on the portal.
+    humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/en/help/api
+    tags: [ IIIF, Digital Archives, Library, Images, Metadata, Open Data ]
+    properties:
+      - type: Documentation
+        url: https://da.dl.itc.u-tokyo.ac.jp/portal/en/help/api
+      - type: GitHub
+        url: https://github.com/utda
+      - type: SourceCode
+        url: https://github.com/utda/dataset
+  - aid: university-of-tokyo:repository-oai-pmh
+    name: UTokyo Repository OAI-PMH
+    description: >-
+      The UTokyo Repository is the University of Tokyo's institutional
+      repository (running the WEKO platform) for storing and disseminating
+      digital research outputs including journal articles, theses, reports, and
+      working papers. It exposes an OAI-PMH 2.0 endpoint for harvesting metadata
+      records in standard formats. No API key is required.
+    humanURL: https://repository.dl.itc.u-tokyo.ac.jp/?lang=english
+    baseURL: https://repository.dl.itc.u-tokyo.ac.jp/oai
+    tags: [ OAI-PMH, Repository, Metadata, Open Access, Library, Research ]
+    properties:
+      - type: Documentation
+        url: https://www.lib.u-tokyo.ac.jp/en/library/contents/database/15
+      - type: Authentication
+        url: https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
+common:
+  - type: Website
+    url: https://www.u-tokyo.ac.jp/en/
+  - type: GitHub
+    url: https://github.com/utda
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/university-of-tokyo/
+  - type: DeveloperPortal
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/en/help/api
+  - type: SourceCode
+    url: https://github.com/utda/dataset
+  - type: Plans
+    url: plans/university-of-tokyo-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/university-of-tokyo-rate-limits.yml
+  - type: FinOps
+    url: finops/university-of-tokyo-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

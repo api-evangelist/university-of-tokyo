@@ -1,0 +1,46 @@
+---
+name: University of Tokyo
+description: University of Tokyo public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/university-of-tokyo/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      The University of Tokyo has no unified, branded developer portal or
+      authenticated REST API program. Its confirmed public, machine-readable
+      surface is library/digital-humanities oriented: the utda Digital Archive
+      Portal exposes IIIF image/presentation APIs plus downloadable IIIF
+      Collections and JSON-LD/RDF/CSV/TEI datasets (API docs Japanese-only),
+      and the UTokyo Repository (WEKO) serves a live OAI-PMH 2.0 endpoint that
+      was verified to return a valid Identify response (repositoryName
+      "UTokyo Repository"). The official GitHub at github.com/UTokyo exists but
+      has no public repositories; the active code presence is github.com/utda.
+      No course/SIS/timetable APIs were found public. All listed URLs were
+      probed live; nothing here is fabricated.
+    endpoints:
+      - url: https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
+        status: 200
+        note: Live OAI-PMH 2.0 Identify; WEKO, repositoryName "UTokyo Repository".
+      - url: https://da.dl.itc.u-tokyo.ac.jp/portal/en/help/api
+        status: 200
+        note: Digital Archive IIIF API help page; full API docs Japanese-only.
+      - url: https://repository.dl.itc.u-tokyo.ac.jp/?lang=english
+        status: 200
+        note: UTokyo Repository institutional repository home.
+      - url: https://github.com/utda
+        status: 200
+        note: Active UTokyo Digital Archives org; dataset and IIIF tooling repos.
+      - url: https://github.com/UTokyo
+        status: 200
+        note: Org exists but has no public repositories.
+      - url: https://www.lib.u-tokyo.ac.jp/en/
+        status: 200
+        note: University of Tokyo Library System (English).
+      - url: https://www.u-tokyo.ac.jp/en/
+        status: 200
+        note: Official university website (English).
+      - url: https://www.linkedin.com/school/university-of-tokyo/
+        status: 999
+        note: LinkedIn school page; 999 is LinkedIn bot block, URL is standard.
