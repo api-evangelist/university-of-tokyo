@@ -68,6 +68,8 @@ apis:
       - type: Authentication
         url: https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
 common:
+  - type: DomainSecurity
+    url: security/university-of-tokyo-domain-security.yml
   - type: Website
     url: https://www.u-tokyo.ac.jp/en/
   - type: GitHub
