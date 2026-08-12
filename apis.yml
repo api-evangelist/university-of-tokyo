@@ -80,6 +80,9 @@ apis:
       - type: Authentication
         url: https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
 common:
+  - type: License
+    name: CC-BY-4.0
+    url: https://github.com/utda/dataset/blob/master/LICENSE
   - type: DomainSecurity
     url: security/university-of-tokyo-domain-security.yml
   - type: Website
