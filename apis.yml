@@ -172,7 +172,18 @@ apis:
       collection. This is the most standards-conformant surface the institution runs.
     humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/en
     baseURL: https://iiif.dl.itc.u-tokyo.ac.jp/iiif/2
-    tags: [ IIIF, Images, Digital Archives, Library, Cultural Heritage ]
+    tags:
+    - IIIF
+    - Image
+    - Digital Archives
+    - Library
+    - Cultural Heritage
+    tags_raw:
+    - IIIF
+    - Images
+    - Digital Archives
+    - Library
+    - Cultural Heritage
     properties:
       - type: OpenAPI
         url: openapi/university-of-tokyo-archives-portal-openapi.yml
