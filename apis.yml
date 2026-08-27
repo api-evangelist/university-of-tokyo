@@ -122,175 +122,280 @@ x-coverage:
     - url: https://utokyo.instructure.com/
       status: 404
 apis:
-  - aid: university-of-tokyo:archives-portal
-    name: UTokyo Academic Assets Archives Portal API
-    x-operator: institution
-    x-operator-evidence: >-
-      da.dl.itc.u-tokyo.ac.jp is under the university's own registrable domain. Manifests carry
-      attribution "東京大学総合図書館 General Library, The University of Tokyo, JAPAN" and a license
-      pointing at lib.u-tokyo.ac.jp. No vendor host, title or contact appears anywhere.
-    description: >-
-      The one surface where the University of Tokyo publishes actual API documentation — at
-      /portal/help/api, in Japanese only. It names a search API described as OpenSearch and a
-      harvesting API described as OAI-PMH, and alongside them the portal serves item
-      representations as JSON-LD (application/ld+json, DC-NDL vocabulary), CSV and refer/BibIX
-      through a _format parameter. The search endpoint itself returns HTTP 403 to external
-      automated clients even though its OpenSearch description document is served at 200; the
-      item representations and manifests are open.
-    humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
-    baseURL: https://da.dl.itc.u-tokyo.ac.jp/portal
-    tags: [ Digital Archives, Library, Metadata, Open Access, JSON-LD, OpenSearch, IIIF ]
-    properties:
-      - type: OpenAPI
-        url: openapi/university-of-tokyo-archives-portal-openapi.yml
-      - type: OpenAPI Source
-        url: openapi/_original/university-of-tokyo-archives-portal-openapi.yml
-      - type: Documentation
-        url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
-      - type: APIReference
-        url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
-      - type: Examples
-        url: examples/university-of-tokyo-archives-item-jsonld.json
-      - type: JSONLD
-        url: json-ld/university-of-tokyo-context.jsonld
-      - type: Vocabulary
-        url: vocabulary/university-of-tokyo-vocabulary.yml
-      - type: SourceCode
-        url: https://github.com/utda
-  - aid: university-of-tokyo:iiif
-    name: UTokyo IIIF Presentation and Image APIs
-    x-operator: institution
-    x-operator-evidence: >-
-      iiif.dl.itc.u-tokyo.ac.jp and da.dl.itc.u-tokyo.ac.jp are both u-tokyo.ac.jp hosts. The
-      Image API server serves the university's own logo at /images/ut-logo.jpg.
-    description: >-
-      IIIF Presentation API 2.1 manifests served from the Archives Portal and a IIIF Image API 2.0
-      level2 service on iiif.dl.itc.u-tokyo.ac.jp. The Image server declares formats tif/jpg/gif/png,
-      qualities bitonal/default/gray/color, 512x512 tiling with scale factors to 128, arbitrary
-      rotation, CORS and canonical link headers. Manifests carry attribution, license,
-      viewingDirection and cross-links to the item page, the item JSON-LD and the parent
-      collection. This is the most standards-conformant surface the institution runs.
-    humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/en
-    baseURL: https://iiif.dl.itc.u-tokyo.ac.jp/iiif/2
-    tags:
-    - IIIF
-    - Image
-    - Digital Archives
-    - Library
-    - Cultural Heritage
-    tags_raw:
-    - IIIF
-    - Images
-    - Digital Archives
-    - Library
-    - Cultural Heritage
-    properties:
-      - type: OpenAPI
-        url: openapi/university-of-tokyo-archives-portal-openapi.yml
-      - type: Documentation
-        url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
-      - type: Examples
-        url: examples/university-of-tokyo-iiif-presentation-manifest.json
-      - type: Conformance
-        url: conformance/university-of-tokyo-conformance.yml
-      - type: SourceCode
-        url: https://github.com/utda/mirador
-  - aid: university-of-tokyo:oai-pmh
-    name: UTokyo OAI-PMH Metadata Harvesting
-    x-operator: institution
-    x-operator-evidence: >-
-      Both endpoints are on u-tokyo.ac.jp hosts and both Identify responses name the University of
-      Tokyo with a lib.u-tokyo.ac.jp admin contact (digilib@ and jitsumu_arch@).
-    description: >-
-      Two independent OAI-PMH 2.0 endpoints, both institution-operated. The UTokyo Repository at
-      repository.dl.itc.u-tokyo.ac.jp/oai offers seven metadata formats (JPCOAR 2.0, JPCOAR 1.0,
-      oai_dc, DDI Codebook 2.5, IEEE LOM) with earliest datestamp 2017-03-28 and transient
-      deletion records. The Archives Portal at da.dl.itc.u-tokyo.ac.jp/portal/oai offers five
-      formats including DC-NDL, covers 1,957 sets, has an earliest datestamp of 2013-01-01 and
-      persistent deletion records, and is documented by the university with full verb, parameter
-      and resumptionToken paging tables. No key required.
-    humanURL: https://www.lib.u-tokyo.ac.jp/en/library/contents/database/15
-    baseURL: https://repository.dl.itc.u-tokyo.ac.jp/oai
-    tags: [ OAI-PMH, Repository, Metadata, Open Access, Library, Research Data, JPCOAR ]
-    properties:
-      - type: OpenAPI
-        url: openapi/university-of-tokyo-oai-pmh-openapi.yml
-      - type: OpenAPI Source
-        url: openapi/_original/university-of-tokyo-oai-pmh-openapi.yml
-      - type: Documentation
-        url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
-      - type: Examples
-        url: examples/university-of-tokyo-repository-oai-identify.xml
-      - type: Conformance
-        url: conformance/university-of-tokyo-conformance.yml
-      - type: Rules
-        url: rules/university-of-tokyo-harvest-rules.yml
-      - type: Authentication
-        url: authentication/university-of-tokyo-authentication.yml
-  - aid: university-of-tokyo:repository-records
-    name: UTokyo Repository Records API
-    x-operator: institution
-    x-operator-evidence: >-
-      repository.dl.itc.u-tokyo.ac.jp is a u-tokyo.ac.jp host running WEKO3, the open-source
-      repository platform NII publishes, installed and operated by the University of Tokyo Library
-      System. It is self-hosted software, not a vendor tenancy — no vendor host, contact or brand
-      appears in any response.
-    description: >-
-      A live, unauthenticated JSON records interface at /api/records/ exposing 69,549 repository
-      records with full-text query, size/page paging and self/next links. Records carry
-      JPCOAR-shaped metadata and a registered DOI under the university's own prefix 10.15083 via
-      JaLC. The university documents this nowhere and its robots.txt disallows /api/, so it is
-      recorded as an internal surface that happens to be reachable rather than as a product — but
-      it is genuinely the institution's, genuinely live, and it is the largest machine-readable
-      corpus the university serves.
-    humanURL: https://repository.dl.itc.u-tokyo.ac.jp/
-    baseURL: https://repository.dl.itc.u-tokyo.ac.jp/api
-    tags: [ Repository, Research Data, Open Access, Metadata, JPCOAR, Theses ]
-    properties:
-      - type: OpenAPI
-        url: openapi/university-of-tokyo-repository-records-openapi.yml
-      - type: OpenAPI Source
-        url: openapi/_original/university-of-tokyo-repository-records-openapi.yml
-      - type: JSONSchema
-        url: json-schema/university-of-tokyo-repository-record.schema.json
-      - type: Examples
-        url: examples/university-of-tokyo-repository-records-list.json
-      - type: ErrorCatalog
-        url: errors/university-of-tokyo-error-handling.yml
-      - type: Rules
-        url: rules/university-of-tokyo-harvest-rules.yml
-      - type: Lifecycle
-        url: lifecycle/university-of-tokyo-lifecycle.yml
-  - aid: university-of-tokyo:gakunin-identity-federation
-    name: UTokyo Identity Federation (GakuNin SAML 2.0)
-    x-operator: institution
-    x-operator-evidence: >-
-      All three entityIDs are hosted under u-tokyo.ac.jp (gidp.adm., shibbi.pki.itc.,
-      step10.adm.s.) and each declares Organization Name "The University of Tokyo" / 東京大学.
-      GakuNin is the federation that registers them, operated by the National Institute of
-      Informatics; the identity providers themselves are the university's own Shibboleth
-      deployments on the university's own hosts.
-    description: >-
-      The University of Tokyo operates three SAML 2.0 entities registered in GakuNin, Japan's
-      academic access federation — two Shibboleth Identity Providers (the central UTokyo IdP at
-      gidp.adm.u-tokyo.ac.jp, and a research-collaboration IdP for KAGRA run by the Institute for
-      Cosmic Ray Research) and one Service Provider, the STEP10 course registration system. Their
-      metadata is published continuously in the GakuNin aggregate, which is machine-readable SAML
-      metadata and is the institution's largest genuinely-owned machine-readable artifact. It is
-      also the closest thing to a registrar surface the university exposes: STEP10 is course
-      registration, and it appears here as a federation entity rather than as an API.
-    humanURL: https://www.gakunin.jp/
-    baseURL: https://gidp.adm.u-tokyo.ac.jp/idp/profile/SAML2/Redirect/SSO
-    tags: [ Identity Federation, SAML, Shibboleth, Single Sign-On, GakuNin, Research Infrastructure ]
-    properties:
-      - type: Authentication
-        url: authentication/university-of-tokyo-authentication.yml
-      - type: Examples
-        url: examples/university-of-tokyo-gakunin-saml-metadata.xml
-      - type: Conformance
-        url: conformance/university-of-tokyo-conformance.yml
-      - type: Documentation
-        url: https://www.gakunin.jp/
+- aid: university-of-tokyo:gakunin-identity-federation
+  name: UTokyo Identity Federation (GakuNin SAML 2.0)
+  x-operator: institution
+  x-operator-evidence: >-
+    All three entityIDs are hosted under u-tokyo.ac.jp (gidp.adm., shibbi.pki.itc., step10.adm.s.) and
+    each declares Organization Name "The University of Tokyo" / 東京大学. GakuNin is the federation that registers
+    them, operated by the National Institute of Informatics; the identity providers themselves are the
+    university's own Shibboleth deployments on the university's own hosts.
+  description: >-
+    The University of Tokyo operates three SAML 2.0 entities registered in GakuNin, Japan's academic access
+    federation — two Shibboleth Identity Providers (the central UTokyo IdP at gidp.adm.u-tokyo.ac.jp,
+    and a research-collaboration IdP for KAGRA run by the Institute for Cosmic Ray Research) and one Service
+    Provider, the STEP10 course registration system. Their metadata is published continuously in the GakuNin
+    aggregate, which is machine-readable SAML metadata and is the institution's largest genuinely-owned
+    machine-readable artifact. It is also the closest thing to a registrar surface the university exposes:
+    STEP10 is course registration, and it appears here as a federation entity rather than as an API.
+  humanURL: https://www.gakunin.jp/
+  baseURL: https://gidp.adm.u-tokyo.ac.jp/idp/profile/SAML2/Redirect/SSO
+  tags:
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - Single Sign-On
+  - GakuNin
+  - Research Infrastructure
+  properties:
+  - type: Authentication
+    url: authentication/university-of-tokyo-authentication.yml
+  - type: Examples
+    url: examples/university-of-tokyo-gakunin-saml-metadata.xml
+  - type: Conformance
+    url: conformance/university-of-tokyo-conformance.yml
+  - type: Documentation
+    url: https://www.gakunin.jp/
+- aid: university-of-tokyo:university-of-tokyo-iiif-api
+  name: University of Tokyo Iiif API
+  description: IIIF Presentation and Image API endpoints.
+  humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  baseURL: https://da.dl.itc.u-tokyo.ac.jp/portal
+  tags:
+  - iiif
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-tokyo-iiif-api-openapi.yml
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-archives-portal-openapi.yml
+  - type: Documentation
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - type: APIReference
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - type: Examples
+    url: examples/university-of-tokyo-archives-item-jsonld.json
+  - type: JSONLD
+    url: json-ld/university-of-tokyo-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/university-of-tokyo-vocabulary.yml
+  - type: SourceCode
+    url: https://github.com/utda
+  - type: Examples
+    url: examples/university-of-tokyo-iiif-presentation-manifest.json
+  - type: Conformance
+    url: conformance/university-of-tokyo-conformance.yml
+  - type: SourceCode
+    url: https://github.com/utda/mirador
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-oai-pmh-openapi.yml
+  - type: Examples
+    url: examples/university-of-tokyo-repository-oai-identify.xml
+  - type: Rules
+    url: rules/university-of-tokyo-harvest-rules.yml
+  - type: Authentication
+    url: authentication/university-of-tokyo-authentication.yml
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-repository-records-openapi.yml
+  - type: JSONSchema
+    url: json-schema/university-of-tokyo-repository-record.schema.json
+  - type: Examples
+    url: examples/university-of-tokyo-repository-records-list.json
+  - type: ErrorCatalog
+    url: errors/university-of-tokyo-error-handling.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-tokyo-lifecycle.yml
+- aid: university-of-tokyo:university-of-tokyo-items-api
+  name: University of Tokyo Items API
+  description: Item representations in JSON-LD, CSV and refer/BibIX.
+  humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  baseURL: https://da.dl.itc.u-tokyo.ac.jp/portal
+  tags:
+  - items
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-tokyo-items-api-openapi.yml
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-archives-portal-openapi.yml
+  - type: Documentation
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - type: APIReference
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - type: Examples
+    url: examples/university-of-tokyo-archives-item-jsonld.json
+  - type: JSONLD
+    url: json-ld/university-of-tokyo-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/university-of-tokyo-vocabulary.yml
+  - type: SourceCode
+    url: https://github.com/utda
+  - type: Examples
+    url: examples/university-of-tokyo-iiif-presentation-manifest.json
+  - type: Conformance
+    url: conformance/university-of-tokyo-conformance.yml
+  - type: SourceCode
+    url: https://github.com/utda/mirador
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-oai-pmh-openapi.yml
+  - type: Examples
+    url: examples/university-of-tokyo-repository-oai-identify.xml
+  - type: Rules
+    url: rules/university-of-tokyo-harvest-rules.yml
+  - type: Authentication
+    url: authentication/university-of-tokyo-authentication.yml
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-repository-records-openapi.yml
+  - type: JSONSchema
+    url: json-schema/university-of-tokyo-repository-record.schema.json
+  - type: Examples
+    url: examples/university-of-tokyo-repository-records-list.json
+  - type: ErrorCatalog
+    url: errors/university-of-tokyo-error-handling.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-tokyo-lifecycle.yml
+- aid: university-of-tokyo:university-of-tokyo-oai-pmh-api
+  name: University of Tokyo Oai Pmh API
+  description: Open Archives Initiative Protocol for Metadata Harvesting, version 2.0.
+  humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  baseURL: https://da.dl.itc.u-tokyo.ac.jp/portal
+  tags:
+  - oai-pmh
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-tokyo-oai-pmh-api-openapi.yml
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-archives-portal-openapi.yml
+  - type: Documentation
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - type: APIReference
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - type: Examples
+    url: examples/university-of-tokyo-archives-item-jsonld.json
+  - type: JSONLD
+    url: json-ld/university-of-tokyo-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/university-of-tokyo-vocabulary.yml
+  - type: SourceCode
+    url: https://github.com/utda
+  - type: Examples
+    url: examples/university-of-tokyo-iiif-presentation-manifest.json
+  - type: Conformance
+    url: conformance/university-of-tokyo-conformance.yml
+  - type: SourceCode
+    url: https://github.com/utda/mirador
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-oai-pmh-openapi.yml
+  - type: Examples
+    url: examples/university-of-tokyo-repository-oai-identify.xml
+  - type: Rules
+    url: rules/university-of-tokyo-harvest-rules.yml
+  - type: Authentication
+    url: authentication/university-of-tokyo-authentication.yml
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-repository-records-openapi.yml
+  - type: JSONSchema
+    url: json-schema/university-of-tokyo-repository-record.schema.json
+  - type: Examples
+    url: examples/university-of-tokyo-repository-records-list.json
+  - type: ErrorCatalog
+    url: errors/university-of-tokyo-error-handling.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-tokyo-lifecycle.yml
+- aid: university-of-tokyo:university-of-tokyo-records-api
+  name: University of Tokyo Records API
+  description: Deposited items — theses, journal articles, departmental bulletins, research data.
+  humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  baseURL: https://da.dl.itc.u-tokyo.ac.jp/portal
+  tags:
+  - records
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-tokyo-records-api-openapi.yml
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-archives-portal-openapi.yml
+  - type: Documentation
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - type: APIReference
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - type: Examples
+    url: examples/university-of-tokyo-archives-item-jsonld.json
+  - type: JSONLD
+    url: json-ld/university-of-tokyo-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/university-of-tokyo-vocabulary.yml
+  - type: SourceCode
+    url: https://github.com/utda
+  - type: Examples
+    url: examples/university-of-tokyo-iiif-presentation-manifest.json
+  - type: Conformance
+    url: conformance/university-of-tokyo-conformance.yml
+  - type: SourceCode
+    url: https://github.com/utda/mirador
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-oai-pmh-openapi.yml
+  - type: Examples
+    url: examples/university-of-tokyo-repository-oai-identify.xml
+  - type: Rules
+    url: rules/university-of-tokyo-harvest-rules.yml
+  - type: Authentication
+    url: authentication/university-of-tokyo-authentication.yml
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-repository-records-openapi.yml
+  - type: JSONSchema
+    url: json-schema/university-of-tokyo-repository-record.schema.json
+  - type: Examples
+    url: examples/university-of-tokyo-repository-records-list.json
+  - type: ErrorCatalog
+    url: errors/university-of-tokyo-error-handling.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-tokyo-lifecycle.yml
+- aid: university-of-tokyo:university-of-tokyo-search-api
+  name: University of Tokyo Search API
+  description: OpenSearch-described search over the portal.
+  humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  baseURL: https://da.dl.itc.u-tokyo.ac.jp/portal
+  tags:
+  - search
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-tokyo-search-api-openapi.yml
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-archives-portal-openapi.yml
+  - type: Documentation
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - type: APIReference
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - type: Examples
+    url: examples/university-of-tokyo-archives-item-jsonld.json
+  - type: JSONLD
+    url: json-ld/university-of-tokyo-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/university-of-tokyo-vocabulary.yml
+  - type: SourceCode
+    url: https://github.com/utda
+  - type: Examples
+    url: examples/university-of-tokyo-iiif-presentation-manifest.json
+  - type: Conformance
+    url: conformance/university-of-tokyo-conformance.yml
+  - type: SourceCode
+    url: https://github.com/utda/mirador
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-oai-pmh-openapi.yml
+  - type: Examples
+    url: examples/university-of-tokyo-repository-oai-identify.xml
+  - type: Rules
+    url: rules/university-of-tokyo-harvest-rules.yml
+  - type: Authentication
+    url: authentication/university-of-tokyo-authentication.yml
+  - type: OpenAPI Source
+    url: openapi/_original/university-of-tokyo-repository-records-openapi.yml
+  - type: JSONSchema
+    url: json-schema/university-of-tokyo-repository-record.schema.json
+  - type: Examples
+    url: examples/university-of-tokyo-repository-records-list.json
+  - type: ErrorCatalog
+    url: errors/university-of-tokyo-error-handling.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-tokyo-lifecycle.yml
 common:
   - type: Website
     url: https://www.u-tokyo.ac.jp/en/
