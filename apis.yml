@@ -24,6 +24,20 @@ description: >-
   English-language survey finds nothing here at all; and the documented search API returns HTTP
   403 to every external automated client, so it is blocked rather than absent.
 type: Index
+deliveryModel:
+  model: saas
+  license: Reuse conditions of the General Library, The University of Tokyo
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 position: Consumer
 access: 3rd-Party
 accessModel:
@@ -397,6 +411,8 @@ apis:
   - type: Lifecycle
     url: lifecycle/university-of-tokyo-lifecycle.yml
 common:
+  - type: IssueTracker
+    url: https://github.com/utda/mirador/issues
   - type: Website
     url: https://www.u-tokyo.ac.jp/en/
   - type: Documentation
