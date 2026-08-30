@@ -1,0 +1,229 @@
+generated: '2026-08-19'
+method: probed
+source:
+  - https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
+  - https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=ListMetadataFormats
+  - https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=ListSets
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/oai?verb=Identify
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/oai?verb=ListMetadataFormats
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/oai?verb=ListSets
+  - https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/repo/iiif/fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b/manifest
+  - https://iiif.dl.itc.u-tokyo.ac.jp/iiif/2/seishu%2FA00_5995%2F001%2FA00_5995_001_0001.tif/info.json
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/opensearch.xml
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/assets/fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b?_format=json
+  - https://www.u-tokyo.ac.jp/.well-known/security.txt
+  - https://www.u-tokyo.ac.jp/llms.txt
+  - https://www.u-tokyo.ac.jp/robots.txt
+note: >-
+  Conformance is recorded only where a live response demonstrated it. The University of Tokyo
+  makes no conformance claim in prose anywhere that could be found; everything below was
+  established by fetching the endpoint and reading what it returned. Standards it does not
+  implement are recorded as false with the negative evidence, because for an institution the
+  absence is as load-bearing as the presence.
+standards:
+  - id: oai-pmh
+    name: Open Archives Initiative Protocol for Metadata Harvesting 2.0
+    conforms: true
+    version: '2.0'
+    spec: http://www.openarchives.org/OAI/openarchivesprotocol.html
+    operator: institution
+    evidence: >-
+      Two independent institution-operated endpoints answer the protocol correctly.
+      https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify returns HTTP 200, 806 bytes,
+      protocolVersion 2.0, repositoryName "UTokyo Repository", adminEmail
+      digilib@lib.u-tokyo.ac.jp, earliestDatestamp 2017-03-28T00:00:00Z, deletedRecord
+      transient, granularity YYYY-MM-DDThh:mm:ssZ. ListMetadataFormats returns seven prefixes
+      (jpcoar_2.0, jpcoar, jpcoar_1.0, jpcoar_v1, oai_dc, ddi, lom).
+      https://da.dl.itc.u-tokyo.ac.jp/portal/oai?verb=Identify returns HTTP 200, 818 bytes,
+      repositoryName "UTokyo Academic Archives Portal", adminEmail
+      jitsumu_arch@lib.u-tokyo.ac.jp, earliestDatestamp 2013-01-01T12:00:00Z, deletedRecord
+      persistent; ListMetadataFormats returns five prefixes (oai_dc, dcndl_simple, dcndl_js,
+      junii2, jpcoar); ListSets returns 320,741 bytes describing 1,957 sets. The Archives
+      Portal endpoint is documented by the university itself at
+      https://da.dl.itc.u-tokyo.ac.jp/portal/help/api including verbs, parameters and
+      resumptionToken paging.
+    location: openapi/university-of-tokyo-oai-pmh-openapi.yml
+    examples:
+      - examples/university-of-tokyo-repository-oai-identify.xml
+      - examples/university-of-tokyo-repository-oai-listmetadataformats.xml
+      - examples/university-of-tokyo-archives-oai-identify.xml
+      - examples/university-of-tokyo-archives-oai-listmetadataformats.xml
+  - id: saml
+    name: SAML 2.0 Metadata (OASIS)
+    conforms: true
+    version: '2.0'
+    spec: https://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf
+    operator: institution
+    evidence: >-
+      The GakuNin federation metadata aggregate
+      (https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml, HTTP 200, 5,649,623 bytes,
+      content-type application/samlmetadata+xml, 650 EntityDescriptors) contains three entities
+      whose entityID is under u-tokyo.ac.jp, each carrying mdrpi:registrationAuthority
+      https://www.gakunin.jp — https://gidp.adm.u-tokyo.ac.jp/idp/shibboleth (IDPSSODescriptor
+      + AttributeAuthorityDescriptor, mdui:DisplayName "The University of Tokyo" / 東京大学,
+      contact systemshien.adm@gs.mail.u-tokyo.ac.jp),
+      https://shibbi.pki.itc.u-tokyo.ac.jp/idp/shibboleth (IdP for KAGRA, Organization
+      "The University of Tokyo", contact kagra-idp-contact@icrr.u-tokyo.ac.jp), and
+      https://step10.adm.s.u-tokyo.ac.jp/shibboleth-sp (SPSSODescriptor, "STEP10 course
+      registration system"). Each IdP advertises SAML2 Redirect and POST SingleSignOnService
+      endpoints on a u-tokyo.ac.jp host.
+    location: examples/university-of-tokyo-gakunin-saml-metadata.xml
+  - id: shibboleth
+    name: Shibboleth (SAML federated single sign-on)
+    conforms: true
+    spec: https://www.shibboleth.net/
+    operator: institution
+    evidence: >-
+      Both University of Tokyo IdPs are Shibboleth deployments — their SSO endpoints follow the
+      Shibboleth IdP path scheme (/idp/profile/Shibboleth/SSO, /idp/profile/SAML2/POST/SSO,
+      /idp/profile/SAML2/Redirect/SSO), they advertise protocolSupportEnumeration including
+      urn:mace:shibboleth:1.0, and they carry shibmd:Scope regexp="false" of u-tokyo.ac.jp.
+      The SP entity uses the Shibboleth.sso assertion-consumer paths. Registered in GakuNin,
+      the Japanese academic access federation operated by the National Institute of Informatics.
+    location: examples/university-of-tokyo-gakunin-saml-metadata.xml
+  - id: iiif-presentation
+    name: IIIF Presentation API
+    conforms: true
+    version: '2.1'
+    spec: https://iiif.io/api/presentation/2.1/
+    operator: institution
+    evidence: >-
+      https://da.dl.itc.u-tokyo.ac.jp/portal/repo/iiif/fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b/manifest
+      returns HTTP 200 application/json, 2,611 bytes, with "@context":
+      "http://iiif.io/api/presentation/2/context.json", "@type": "sc:Manifest", label 百鬼夜行図,
+      attribution "東京大学総合図書館 General Library, The University of Tokyo, JAPAN", license
+      https://www.lib.u-tokyo.ac.jp/ja/library/general/reuse, viewingDirection right-to-left, and
+      a sequences array.
+    location: examples/university-of-tokyo-iiif-presentation-manifest.json
+  - id: iiif-image
+    name: IIIF Image API
+    conforms: true
+    version: '2.0'
+    level: level2
+    spec: https://iiif.io/api/image/2.0/
+    operator: institution
+    evidence: >-
+      https://iiif.dl.itc.u-tokyo.ac.jp/iiif/2/seishu%2FA00_5995%2F001%2FA00_5995_001_0001.tif/info.json
+      returns HTTP 200, 992 bytes, "@context": "http://iiif.io/api/image/2/context.json",
+      protocol http://iiif.io/api/image, profile ["http://iiif.io/api/image/2/level2.json", …]
+      declaring formats tif/jpg/gif/png, qualities bitonal/default/gray/color, supports
+      regionByPx, regionByPct, regionSquare, sizeByW, sizeByH, sizeByPct, sizeByConfinedWh,
+      rotationArbitrary, cors, canonicalLinkHeader, jsonldMediaType; 512×512 tiles with
+      scaleFactors to 128; source image 14,204 × 10,652.
+    location: examples/university-of-tokyo-iiif-image-info.json
+  - id: opensearch
+    name: OpenSearch description document 1.1
+    conforms: partial
+    version: '1.1'
+    spec: https://github.com/dewitt/opensearch
+    operator: institution
+    evidence: >-
+      https://da.dl.itc.u-tokyo.ac.jp/portal/opensearch.xml returns HTTP 200 with a valid
+      OpenSearchDescription (ShortName 東京大学デジタルアーカイブポータル, Url template
+      https://da.dl.itc.u-tokyo.ac.jp/portal/search?kywd={searchTerms}, moz:SearchForm). Marked
+      partial because the endpoint the description points at returns HTTP 403 to every external
+      automated client tested — the description conforms, the described service is not reachable.
+    location: examples/university-of-tokyo-archives-opensearch-description.xml
+  - id: json-ld
+    name: JSON-LD 1.1
+    conforms: true
+    spec: https://www.w3.org/TR/json-ld11/
+    operator: institution
+    evidence: >-
+      https://da.dl.itc.u-tokyo.ac.jp/portal/assets/{uuid}?_format=json returns HTTP 200 with
+      content-type application/ld+json and an @context binding dcndl, dcterms, foaf, rdfs and
+      dc, plus an @id. Descriptive metadata follows DC-NDL, the National Diet Library Dublin
+      Core application profile, which the portal names as its base metadata form.
+    location: examples/university-of-tokyo-archives-item-jsonld.json
+  - id: jpcoar
+    name: JPCOAR Schema (Japan Consortium for Open Access Repositories)
+    conforms: true
+    version: '2.0'
+    spec: https://schema.irdb.nii.ac.jp/en
+    operator: institution
+    evidence: >-
+      The repository's ListMetadataFormats advertises jpcoar_2.0 against
+      https://irdb.nii.ac.jp/schema/jpcoar/2.0/jpcoar_scm.xsd, plus jpcoar_1.0, jpcoar_v1 and a
+      default jpcoar prefix. The Archives Portal advertises jpcoar as well. JSON records from
+      /api/records/ carry JPCOAR-shaped fields (identifierRegistration, accessRights,
+      degreeGrantor, dateGranted, dissertationNumber).
+    location: openapi/university-of-tokyo-oai-pmh-openapi.yml
+  - id: orcid
+    name: ORCID
+    conforms: false
+    operator: institution
+    evidence: >-
+      No ORCID identifier appears in any sampled record. The only nameIdentifierScheme value
+      observed across the /api/records/ sample was "WEKO" — the repository's internal author
+      identifier. Creator entries carry creatorName and creatorNameLang only.
+  - id: datacite
+    name: DataCite Metadata Schema / DOI registration via DataCite
+    conforms: false
+    operator: institution
+    evidence: >-
+      DOIs are minted under the university's prefix 10.15083 with identifierType "JaLC" — the
+      Japan Link Center, a separate DOI registration agency. Every sampled record used JaLC.
+      No DataCite registration, DataCite metadata prefix or DataCite MDS endpoint was found.
+      The DOI infrastructure is real; the registration agency is not DataCite.
+  - id: crossref
+    name: Crossref
+    conforms: false
+    operator: institution
+    evidence: >-
+      No Crossref deposit, Crossref DOI prefix or Crossref-registered identifier was observed on
+      any institution-operated surface. Registration runs through JaLC.
+  - id: scim
+    name: SCIM 2.0
+    conforms: false
+    evidence: No SCIM endpoint or SCIM claim was found on any u-tokyo.ac.jp host.
+  - id: lti
+    name: IMS Learning Tools Interoperability
+    conforms: false
+    evidence: >-
+      UTOL (https://utol.ecc.u-tokyo.ac.jp/, the university's own LMS, HTTP 200 redirecting to
+      /login) is behind institutional authentication and publishes no LTI registration,
+      tool-configuration or platform-configuration document publicly.
+  - id: oneroster
+    name: IMS OneRoster
+    conforms: false
+    evidence: No OneRoster endpoint or claim found.
+  - id: ed-fi
+    name: Ed-Fi Data Standard
+    conforms: false
+    evidence: Ed-Fi is a US K-12 standard; no trace on any University of Tokyo surface.
+  - id: caliper
+    name: IMS Caliper Analytics
+    conforms: false
+    evidence: No Caliper sensor, endpoint or claim found.
+  - id: qti
+    name: IMS Question and Test Interoperability
+    conforms: false
+    evidence: No QTI artifact or claim found on any public surface.
+  - id: rfc9116-security-txt
+    name: RFC 9116 security.txt
+    conforms: false
+    evidence: https://www.u-tokyo.ac.jp/.well-known/security.txt returns HTTP 404 (131 bytes).
+  - id: llmstxt
+    name: llms.txt
+    conforms: false
+    evidence: https://www.u-tokyo.ac.jp/llms.txt returns HTTP 404 (131 bytes).
+  - id: robots-exclusion
+    name: Robots Exclusion Protocol
+    conforms: true
+    evidence: >-
+      https://www.u-tokyo.ac.jp/robots.txt returns HTTP 200, 129 bytes, "User-agent: * /
+      Disallow: /gakunai/" with the Sitemap line commented out as a template placeholder
+      ("Sitemap: https://www.u-tokyo.ac.jp/XXX"), so no sitemap is actually declared.
+      https://repository.dl.itc.u-tokyo.ac.jp/robots.txt returns HTTP 200, 614 bytes, and
+      disallows /api/, /oai, /search and /admin/ — including the OAI-PMH path the library
+      documents publicly as its harvesting interface, which marks the file as a stock WEKO3
+      default rather than a considered policy.
+  - id: openapi
+    name: OpenAPI Specification
+    conforms: false
+    evidence: >-
+      The University of Tokyo publishes no OpenAPI, AsyncAPI, GraphQL schema, Postman collection
+      or JSON Schema on any institution host. The three OpenAPI documents in this repository were
+      derived by API Evangelist from live probes and are marked as such in their x-provenance
+      blocks; they are not the university's artifacts and must not be read as such.

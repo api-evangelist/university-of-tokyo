@@ -1,0 +1,132 @@
+generated: '2026-08-19'
+method: derived
+source:
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=ListMetadataFormats
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/oai?verb=ListMetadataFormats
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/assets/fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b?_format=json
+  - https://repository.dl.itc.u-tokyo.ac.jp/api/records/
+  - https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml
+x-operator: institution
+note: >-
+  The University of Tokyo defines almost no vocabulary of its own. Every term a consumer meets on
+  its surfaces belongs to a Japanese national or international metadata standard that the
+  institution adopted — which is the correct posture for a research library and is worth reading
+  as a strength, not a gap. This file records which vocabularies are in play, where each one
+  surfaces, and who owns it, so nothing here is mistaken for University of Tokyo authorship.
+vocabularies:
+  - id: dcndl
+    name: DC-NDL — National Diet Library Dublin Core Metadata Description
+    owner: National Diet Library of Japan
+    owner_type: national-library
+    uri: http://ndl.go.jp/dcndl/terms/
+    used_on:
+      - Archives Portal item JSON-LD (_format=json)
+      - Archives Portal OAI-PMH prefixes dcndl_simple and dcndl_js
+    evidence: >-
+      The portal's own documentation states its metadata follows DC-NDL and that every protocol
+      response takes DC-NDL as its base form. The item JSON-LD @context binds the dcndl prefix and
+      the payload carries dcndl:titleTranscription, dcndl:alternative, dcndl:holdingAgent and
+      dcndl:digitizedPublisher.
+    terms_observed:
+      - dcndl:titleTranscription
+      - dcndl:alternative
+      - dcndl:holdingAgent
+      - dcndl:digitizedPublisher
+  - id: jpcoar
+    name: JPCOAR Schema
+    owner: Japan Consortium for Open Access Repositories
+    owner_type: consortium
+    uri: https://irdb.nii.ac.jp/schema/jpcoar/2.0/
+    versions_offered: ['1.0', '2.0']
+    used_on:
+      - Repository OAI-PMH (prefixes jpcoar_2.0, jpcoar_1.0, jpcoar_v1, jpcoar)
+      - Archives Portal OAI-PMH (prefix jpcoar)
+      - Repository /api/records/ flattened field names
+    terms_observed:
+      - identifierRegistration
+      - accessRights
+      - degreeGrantor
+      - degreeName
+      - dateGranted
+      - dissertationNumber
+      - creatorNames / creatorNameLang
+  - id: dublin-core
+    name: Dublin Core Metadata Element Set
+    owner: DCMI
+    owner_type: standards-body
+    uri: http://purl.org/dc/elements/1.1/
+    used_on: Both OAI-PMH endpoints, prefix oai_dc (mandatory under OAI-PMH 2.0).
+  - id: junii2
+    name: junii2
+    owner: National Institute of Informatics (NII)
+    owner_type: national-institute
+    used_on: Archives Portal OAI-PMH, prefix junii2.
+  - id: ddi
+    name: DDI Codebook 2.5
+    owner: DDI Alliance
+    owner_type: standards-body
+    uri: ddi:codebook:2_5
+    used_on: Repository OAI-PMH, prefix ddi.
+    note: >-
+      A social-science data-documentation standard. Its presence means the repository holds
+      research datasets, not only publications, and is prepared to describe them properly.
+  - id: lom
+    name: IEEE Learning Object Metadata
+    owner: IEEE LTSC
+    owner_type: standards-body
+    uri: http://ltsc.ieee.org/xsd/LOM
+    used_on: Repository OAI-PMH, prefix lom.
+    note: >-
+      The metadataNamespace is IEEE LOM but the advertised schema location points at the
+      LIDO 1.0 XSD (http://www.lido-schema.org/schema/v1.0/lido-v1.0.xsd). The two do not match.
+      Recorded as observed; a harvester should not assume either shape without testing.
+  - id: iiif
+    name: IIIF Presentation and Image API vocabularies
+    owner: IIIF Consortium
+    owner_type: standards-body
+    uri: http://iiif.io/api/presentation/2/context.json
+    used_on: Archives Portal manifests and the iiif.dl.itc.u-tokyo.ac.jp Image API.
+    terms_observed:
+      - sc:Manifest
+      - attribution
+      - license
+      - logo
+      - viewingDirection
+      - within
+      - seeAlso
+      - related
+  - id: saml-metadata
+    name: SAML 2.0 Metadata + MDUI + MDRPI + Shibboleth metadata extensions
+    owner: OASIS / REFEDS / Shibboleth Consortium
+    owner_type: standards-body
+    used_on: The three University of Tokyo entities in the GakuNin federation aggregate.
+    terms_observed:
+      - md:IDPSSODescriptor
+      - md:SPSSODescriptor
+      - md:AttributeAuthorityDescriptor
+      - mdui:DisplayName
+      - mdrpi:registrationAuthority
+      - shibmd:Scope
+institution_defined_terms:
+  - term: WEKO control number
+    where: Repository /api/records/ — metadata.control_number and the record id
+    note: >-
+      A deployment-local integer key. Not a standard identifier, but it is the addressing key for
+      the records interface and the tail of the OAI-PMH identifier.
+  - term: WEKO nameIdentifierScheme
+    where: Repository record creator entries
+    note: >-
+      The only author-identifier scheme observed across the sample. It is repository-internal.
+      No ORCID appears anywhere in the corpus sampled.
+  - term: item_<id> attribute keys
+    where: Repository /api/records/ — metadata._item_metadata
+    note: >-
+      Opaque, deployment-specific WEKO item-type keys (item_7_biblio_info_7,
+      item_1623978586063 …) paired with Japanese attribute_name labels. Not portable between
+      WEKO installations. Read the flattened sibling fields instead.
+  - term: Archives Portal set identifiers
+    where: Archives Portal OAI-PMH ListSets — 1,957 sets
+    note: >-
+      Collection slugs such as gakken, hyakki, seishu. Institution-defined and stable enough to
+      harvest against, but not published as a controlled list outside the ListSets response.

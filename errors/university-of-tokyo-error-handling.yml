@@ -1,0 +1,64 @@
+generated: '2026-08-19'
+method: probed
+source:
+  - https://repository.dl.itc.u-tokyo.ac.jp/api/records/?size=2&format=json
+  - https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/search?kywd=tokyo
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/repo/iiif/collection/hyakki
+rfc9457: false
+format: mixed — OAI-PMH protocol errors in-band, HTTP errors as vendor-default HTML
+note: >-
+  Three different error idioms operate across the University of Tokyo's surfaces, and none of
+  them is a designed API error contract. A client must handle all three.
+error_idioms:
+  - surface: OAI-PMH (both endpoints)
+    idiom: in-band protocol error
+    content_type: text/xml
+    http_status: 200
+    detail: >-
+      Correct per OAI-PMH 2.0 — an <error code="…"> element inside a 200 response. Codes in the
+      protocol: badVerb, badArgument, badResumptionToken, cannotDisseminateFormat, idDoesNotExist,
+      noRecordsMatch, noSetHierarchy. A client that branches on HTTP status alone will read every
+      failure as a success.
+    retryable: false
+  - surface: Repository /api/records/
+    idiom: unhandled server error
+    content_type: text/html
+    http_status: 500
+    detail: >-
+      An unsupported query parameter produced HTTP 500 with a 182-byte body rather than a 400
+      with a machine-readable message. Observed on ?size=2&format=json. Parameter validation is
+      not defensive and there is no error envelope.
+    retryable: false
+  - surface: Archives Portal /portal/search
+    idiom: edge denial
+    content_type: text/html; charset=iso-8859-1
+    http_status: 403
+    detail: >-
+      289-byte Apache/2.4.58 default Forbidden page. No JSON, no reason code, no Retry-After, no
+      contact. Returned to every external automated client tested, with and without a browser
+      User-Agent.
+    retryable: false
+  - surface: repository.dl.itc.u-tokyo.ac.jp (all paths)
+    idiom: inverted User-Agent block
+    content_type: text/html
+    http_status: 406
+    detail: >-
+      nginx returns 406 Not Acceptable when the request carries a desktop-browser User-Agent, and
+      200 when it does not. This is the reverse of the usual bot challenge and will make the host
+      look dead to any crawler that spoofs a browser. Retry without a browser User-Agent.
+    retryable: true
+  - surface: Archives Portal, unknown path
+    idiom: themed HTML 404
+    content_type: text/html; charset=UTF-8
+    http_status: 404
+    detail: >-
+      A full Drupal-themed 404 page (9,366 bytes) rather than a machine-readable body. Correct
+      status code, so a status-code check is reliable; a body check is not.
+    retryable: false
+problem_details_published: false
+status_page: null
+status_page_note: >-
+  No public status or incident page was found for any University of Tokyo digital service. There
+  is no uptime feed, no maintenance calendar reachable without credentials, and no changelog for
+  any of the surfaces in this profile.

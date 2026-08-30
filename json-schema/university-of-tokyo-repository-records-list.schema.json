@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-tokyo/refs/heads/main/json-schema/university-of-tokyo-repository-records-list.schema.json",
+  "title": "UTokyo Repository Records List",
+  "description": "Paged envelope returned by https://repository.dl.itc.u-tokyo.ac.jp/api/records/. Derived from live responses on 2026-08-19.",
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": ["https://repository.dl.itc.u-tokyo.ac.jp/api/records/?size=2"],
+    "x-operator": "institution"
+  },
+  "type": "object",
+  "required": ["hits", "links"],
+  "properties": {
+    "hits": {
+      "type": "object",
+      "required": ["hits", "total"],
+      "properties": {
+        "hits": {
+          "type": "array",
+          "items": { "$ref": "university-of-tokyo-repository-record.schema.json" }
+        },
+        "total": { "type": "integer", "description": "Total matching records. 69549 with no query on 2026-08-19." }
+      }
+    },
+    "aggregations": {
+      "type": "object",
+      "description": "Facet buckets. Empty on every probe."
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": { "type": "string", "format": "uri" },
+        "next": { "type": "string", "format": "uri" },
+        "prev": { "type": "string", "format": "uri" }
+      }
+    }
+  }
+}

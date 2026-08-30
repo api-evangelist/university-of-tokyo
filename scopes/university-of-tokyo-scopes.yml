@@ -1,0 +1,47 @@
+generated: '2026-08-19'
+method: probed
+source:
+  - https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
+  - https://repository.dl.itc.u-tokyo.ac.jp/api/records/
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml
+oauth2: false
+scopes: []
+note: >-
+  There are no OAuth 2.0 scopes to record. No OAuth authorization server, token endpoint or
+  scope vocabulary exists on any University of Tokyo host — /.well-known/oauth-authorization-server
+  and /.well-known/openid-configuration are absent, and every public surface answers
+  unauthenticated. This file exists to record that absence explicitly rather than leave the slot
+  empty and let a reader infer a gap in the profile.
+
+  The nearest equivalent to a scope model at this institution is SAML attribute release through
+  GakuNin — an IdP decides which attributes (eduPersonPrincipalName, eduPersonAffiliation,
+  eduPersonScopedAffiliation, and so on) it releases to which Service Provider. That is an
+  authorization boundary, but it is a federation policy negotiated between entities, not a scope
+  a developer can request. The three University of Tokyo entities and their endpoints are
+  recorded in authentication/university-of-tokyo-authentication.yml.
+authorization_model:
+  public_read:
+    surfaces:
+      - OAI-PMH (both endpoints)
+      - IIIF Presentation manifests and Image API
+      - Archives Portal item representations (_format=json|csv|bix)
+      - Repository /api/records/
+    control: >-
+      Open to anyone. The Archives Portal restricts what it exposes at the data layer instead —
+      only material for which reuse permission was obtained is served through the APIs, per the
+      university's own documentation. Per-record access is carried in the JPCOAR accessRights
+      field ("open access" on every sampled record).
+  federated:
+    surfaces:
+      - UTOL learning management system
+      - HPC Portal (Wisteria / Miyabi)
+      - STEP10 course registration system
+      - Licensed library resources
+    control: SAML 2.0 attribute release via the university's GakuNin-registered Shibboleth IdPs.
+  edge_denied:
+    surfaces:
+      - https://da.dl.itc.u-tokyo.ac.jp/portal/search
+    control: >-
+      Apache-level HTTP 403 to external automated clients regardless of User-Agent. Not an
+      authorization scheme — no credential exists that would lift it.

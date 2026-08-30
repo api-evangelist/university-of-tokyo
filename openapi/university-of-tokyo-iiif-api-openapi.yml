@@ -1,0 +1,196 @@
+openapi: 3.2.0
+info:
+  title: UTokyo Academic Assets Archives Portal Iiif API
+  version: '2026-08-19'
+  summary: Search, item-representation and IIIF interfaces of the University of Tokyo Academic Assets Archives Portal (東京大学学術資産等アーカイブズポータル).
+  description: 'The Academic Assets Archives Portal is operated by the University of Tokyo Library System on
+
+    the university''s own hosts. It is the one surface in this profile where the university
+
+    publishes actual API documentation — at https://da.dl.itc.u-tokyo.ac.jp/portal/help/api, in
+
+    Japanese only. The English help page at /portal/en/help/api carries a single line, "Only
+
+    available in Japanese", and links across. A profile built from the English surface alone
+
+    finds nothing here; that is why this entry exists.
+
+
+    The documented page names two APIs — a search API described as OpenSearch, and a harvesting
+
+    API described as OAI-PMH (covered separately in
+
+    openapi/university-of-tokyo-oai-pmh-openapi.yml). Alongside them the portal serves item
+
+    representations in JSON-LD, CSV and refer/BibIX through a `_format` query parameter, and
+
+    IIIF Presentation and Image endpoints.
+
+
+    **The documented search API is not callable from outside.** Every request to
+
+    `/portal/search`, with and without a browser User-Agent, and from two independent network
+
+    paths, returned HTTP 403 from Apache/2.4.58. The interface is documented and the portal''s own
+
+    navigation links to it, but automated access is blocked at the edge. That is recorded here as
+
+    an observed fact about the deployment, not as a claim that the API does not exist.
+
+
+    Metadata follows DC-NDL (国立国会図書館ダブリンコアメタデータ記述), the National Diet Library
+
+    Dublin Core profile, which the portal names as its base form. Only material for which reuse
+
+    permission was obtained is exposed through the APIs.
+
+    '
+  contact:
+    name: University of Tokyo Library System — Archives Portal
+    email: jitsumu_arch@lib.u-tokyo.ac.jp
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/en/contact
+  license:
+    name: Reuse conditions of the General Library, The University of Tokyo
+    url: https://www.lib.u-tokyo.ac.jp/ja/library/general/reuse
+servers:
+- url: https://da.dl.itc.u-tokyo.ac.jp/portal
+  description: Archives Portal. Institution-operated.
+- url: https://iiif.dl.itc.u-tokyo.ac.jp
+  description: IIIF Image API server. Institution-operated.
+tags:
+- name: iiif
+  description: IIIF Presentation and Image API endpoints.
+paths:
+  /repo/iiif/{assetId}/manifest:
+    get:
+      operationId: getIiifManifest
+      summary: IIIF Presentation manifest for an item
+      description: IIIF Presentation API 2.1 manifest (`@context` http://iiif.io/api/presentation/2/context.json, `@type` sc:Manifest). Carries label, attribution, license, logo, viewingDirection, `related` to the item page, `seeAlso` to the item JSON-LD, `within` to the parent collection, and a sequence of canvases whose images resolve against the IIIF Image API server.
+      tags:
+      - iiif
+      parameters:
+      - name: assetId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b
+      responses:
+        '200':
+          description: IIIF Presentation 2.1 manifest.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                manifest:
+                  summary: 百鬼夜行図, captured live 2026-08-19
+                  externalValue: ../examples/university-of-tokyo-iiif-presentation-manifest.json
+  /iiif/2/{identifier}/info.json:
+    servers:
+    - url: https://iiif.dl.itc.u-tokyo.ac.jp
+      description: IIIF Image API server. Institution-operated.
+    get:
+      operationId: getIiifImageInfo
+      summary: IIIF Image API image information
+      description: IIIF Image API 2.0 information request. The server declares `http://iiif.io/api/image/2/level2.json` compliance, formats tif/jpg/gif/png, qualities bitonal/default/gray/color, 512×512 tiles with scale factors to 128, and maxArea 151,301,008. Identifiers are URL-encoded file paths.
+      tags:
+      - iiif
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        description: URL-encoded image identifier.
+        schema:
+          type: string
+        example: seishu%2FA00_5995%2F001%2FA00_5995_001_0001.tif
+      responses:
+        '200':
+          description: IIIF Image API 2.0 image information document.
+          content:
+            application/ld+json:
+              schema:
+                type: object
+              examples:
+                info:
+                  summary: Captured live 2026-08-19
+                  externalValue: ../examples/university-of-tokyo-iiif-image-info.json
+  /iiif/2/{identifier}/{region}/{size}/{rotation}/{quality}.{format}:
+    servers:
+    - url: https://iiif.dl.itc.u-tokyo.ac.jp
+      description: IIIF Image API server. Institution-operated.
+    get:
+      operationId: getIiifImage
+      summary: IIIF Image API image request
+      description: IIIF Image API 2.0 level 2 image delivery.
+      tags:
+      - iiif
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: path
+        required: true
+        schema:
+          type: string
+        example: full
+      - name: size
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '!220,220'
+      - name: rotation
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '0'
+      - name: quality
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - bitonal
+          - default
+          - gray
+          - color
+      - name: format
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - tif
+          - jpg
+          - gif
+          - png
+      responses:
+        '200':
+          description: The derivative image.
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+externalDocs:
+  description: APIについて — the portal's own API documentation (Japanese only)
+  url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+x-operator: institution
+x-operator-evidence: da.dl.itc.u-tokyo.ac.jp and iiif.dl.itc.u-tokyo.ac.jp are both under u-tokyo.ac.jp. The IIIF manifests carry attribution "東京大学総合図書館 General Library, The University of Tokyo, JAPAN", a logo on iiif.dl.itc.u-tokyo.ac.jp and a license pointing at lib.u-tokyo.ac.jp. No vendor host, title or contact is present anywhere in the surface.
+x-provenance:
+  generated: '2026-08-19'
+  method: probed
+  source:
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/opensearch.xml
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/search?kywd=tokyo
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/assets/fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b?_format=json
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/repo/iiif/fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b/manifest
+  - https://iiif.dl.itc.u-tokyo.ac.jp/iiif/2/seishu%2FA00_5995%2F001%2FA00_5995_001_0001.tif/info.json
+  note: Parameters and formats transcribed from the university's own Japanese documentation page, then probed live. Where documentation and observed behaviour disagree, both are recorded.

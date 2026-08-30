@@ -1,0 +1,314 @@
+openapi: 3.1.0
+info:
+  title: UTokyo Repository Records API
+  version: '2026-08-19'
+  summary: Read-only JSON records API of the University of Tokyo institutional repository.
+  description: |
+    The UTokyo Repository (東京大学学術機関リポジトリ) is the University of Tokyo's institutional
+    repository, self-hosted by the University of Tokyo Library System on the university's own
+    infrastructure at `repository.dl.itc.u-tokyo.ac.jp`. It runs WEKO3, the open-source
+    repository platform published by Japan's National Institute of Informatics (NII) on top of
+    Invenio — software the university installs and operates itself, not a hosted vendor tenancy.
+    The host, the DOI prefix (10.15083, registered through the Japan Link Center), the OAI-PMH
+    admin contact (digilib@lib.u-tokyo.ac.jp) and the operations are all the university's.
+
+    This document describes the read-only JSON records interface that the deployment exposes at
+    `/api/records/`. It is NOT a specification the University of Tokyo publishes. It was derived
+    by API Evangelist from live, unauthenticated probes of the running service on 2026-08-19 and
+    is a description of observed behaviour only.
+
+    Honest caveats, stated because they matter to anyone who would call this:
+
+    * The university does not document this endpoint anywhere public that could be found. The
+      only harvesting interface the University of Tokyo Library System documents is OAI-PMH.
+    * `robots.txt` on this host carries `Disallow: /api/`. It also carries `Disallow: /oai`,
+      which the library documents publicly as the sanctioned harvesting path, so the file reads
+      as a stock WEKO3 default rather than a considered access policy — but it is there, and a
+      well-behaved crawler should honour it.
+    * There is no published rate limit, no versioning policy, no deprecation policy and no
+      support channel for this interface. Treat it as an internal surface that happens to be
+      reachable, not as a product.
+  contact:
+    name: University of Tokyo Library System — Digital Library Section
+    email: digilib@lib.u-tokyo.ac.jp
+    url: https://www.lib.u-tokyo.ac.jp/en/
+  license:
+    name: Rights vary per record; see the accessRights and rights fields of each record
+    url: https://repository.dl.itc.u-tokyo.ac.jp/
+x-operator: institution
+x-operator-evidence: >-
+  Host repository.dl.itc.u-tokyo.ac.jp is under the university's own registrable domain
+  u-tokyo.ac.jp. OAI-PMH Identify on the same host returns repositoryName "UTokyo Repository"
+  and adminEmail digilib@lib.u-tokyo.ac.jp. No vendor name appears in any server, title or
+  contact. The platform (WEKO3) is open-source software from NII that the institution runs;
+  it is not a vendor-hosted tenancy.
+x-provenance:
+  generated: '2026-08-19'
+  method: derived
+  source:
+    - https://repository.dl.itc.u-tokyo.ac.jp/api/records/
+    - https://repository.dl.itc.u-tokyo.ac.jp/api/records/?size=2
+    - https://repository.dl.itc.u-tokyo.ac.jp/api/records/2003301
+    - https://repository.dl.itc.u-tokyo.ac.jp/robots.txt
+  note: >-
+    Derived from live responses, not from a published specification. Every path, parameter and
+    field below was observed in an actual HTTP 200 response on 2026-08-19.
+servers:
+  - url: https://repository.dl.itc.u-tokyo.ac.jp/api
+    description: Production. Institution-operated. No authentication required for read access.
+tags:
+  - name: records
+    description: Deposited items — theses, journal articles, departmental bulletins, research data.
+paths:
+  /records/:
+    get:
+      operationId: listRecords
+      summary: Search and page through repository records
+      description: >-
+        Returns a paged envelope of records. Observed corpus size on 2026-08-19 was 69,549
+        records. Unauthenticated; only publicly published items are returned.
+      tags: [records]
+      parameters:
+        - name: q
+          in: query
+          required: false
+          description: >-
+            Full-text query over record metadata. Observed behaviour — no query returned 69,549
+            hits, `q=東京` returned 63,402, and `q=nonexistentzzzz123` returned 0.
+          schema:
+            type: string
+          example: 東京
+        - name: size
+          in: query
+          required: false
+          description: Records per page. Defaults to 10 when omitted.
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+          example: 2
+        - name: page
+          in: query
+          required: false
+          description: 1-indexed page number. Follow `links.next` rather than computing this.
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+          example: 2
+        - name: sort
+          in: query
+          required: false
+          description: >-
+            Accepted without error (`sort=mostrecent` returned HTTP 200), but no ordering change
+            was observable in the probes run. Documented as observed, not as guaranteed.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A page of records.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordList'
+              examples:
+                twoRecords:
+                  summary: Live response captured 2026-08-19 (?size=2)
+                  externalValue: ../examples/university-of-tokyo-repository-records-list.json
+        '500':
+          description: >-
+            Returned for unsupported query parameters. `?size=2&format=json` produced HTTP 500
+            with a 182-byte body rather than a 400, so parameter validation is not defensive.
+          content:
+            text/html:
+              schema:
+                type: string
+  /records/{recordId}:
+    get:
+      operationId: getRecord
+      summary: Retrieve one record by its control number
+      tags: [records]
+      parameters:
+        - name: recordId
+          in: path
+          required: true
+          description: WEKO control number, also carried as `metadata.control_number`.
+          schema:
+            type: string
+          example: '2003301'
+      responses:
+        '200':
+          description: The record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+              examples:
+                thesis:
+                  summary: Live response captured 2026-08-19
+                  externalValue: ../examples/university-of-tokyo-repository-record.json
+components:
+  schemas:
+    RecordList:
+      type: object
+      description: Paged envelope. Observed on every 200 from /records/.
+      required: [hits, links]
+      properties:
+        hits:
+          type: object
+          required: [hits, total]
+          properties:
+            hits:
+              type: array
+              items:
+                $ref: '#/components/schemas/Record'
+            total:
+              type: integer
+              description: Total matching records.
+              example: 69549
+        aggregations:
+          type: object
+          description: Facet buckets. Observed empty on every probe.
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+            next:
+              type: string
+              format: uri
+            prev:
+              type: string
+              format: uri
+    Record:
+      type: object
+      required: [id, created, updated, links, metadata]
+      properties:
+        id:
+          type: integer
+          description: WEKO control number as an integer.
+          example: 2003301
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+        metadata:
+          $ref: '#/components/schemas/RecordMetadata'
+    RecordMetadata:
+      type: object
+      description: >-
+        JPCOAR-shaped item metadata. `_item_metadata` carries the raw WEKO item-type attribute
+        map with Japanese `attribute_name` labels and opaque `item_<id>` keys; the sibling
+        top-level fields are the flattened, stable view and are what a consumer should read.
+      properties:
+        title:
+          type: array
+          items:
+            type: string
+        creator:
+          type: array
+          items:
+            type: string
+        description:
+          type: array
+          items:
+            type: string
+        date:
+          type: array
+          items:
+            type: string
+        language:
+          type: array
+          items:
+            type: string
+        type:
+          type: array
+          items:
+            type: string
+        itemtype:
+          type: string
+          description: Item type label, bilingual.
+          example: 学位論文 / Thesis or Dissertation
+        accessRights:
+          type: array
+          items:
+            type: string
+          example: [open access]
+        control_number:
+          type: string
+        publish_date:
+          type: string
+        publish_status:
+          type: string
+        path:
+          type: array
+          description: OAI-PMH set memberships this item belongs to.
+          items:
+            type: string
+        identifierRegistration:
+          type: array
+          description: >-
+            Registered persistent identifier. Every sampled record used identifierType JaLC
+            (Japan Link Center) under the university's DOI prefix 10.15083. No DataCite or
+            Crossref registration was observed.
+          items:
+            type: object
+            properties:
+              identifierType:
+                type: string
+                example: JaLC
+              value:
+                type: string
+                example: 10.15083/0002003301
+        degreeName:
+          type: array
+          items:
+            type: string
+        degreeGrantor:
+          type: array
+          items:
+            type: string
+        dateGranted:
+          type: array
+          items:
+            type: string
+        dissertationNumber:
+          type: array
+          items:
+            type: string
+        _oai:
+          type: object
+          description: OAI-PMH identifier and set membership for this item.
+        _files_info:
+          type: array
+          description: Attached files with label, extension, availability date and direct URL.
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              extention:
+                type: string
+              url:
+                type: string
+                format: uri
+              date:
+                type: array
+                items:
+                  type: object
+        _creator_info:
+          type: array
+          items:
+            type: object
+        _item_metadata:
+          type: object
+          description: Raw WEKO item-type attribute map. Keys are deployment-specific.

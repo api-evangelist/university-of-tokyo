@@ -1,0 +1,57 @@
+generated: '2026-08-19'
+method: probed
+source:
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/oai?verb=Identify
+  - https://iiif.dl.itc.u-tokyo.ac.jp/iiif/2/seishu%2FA00_5995%2F001%2FA00_5995_001_0001.tif/info.json
+  - https://github.com/utda/genji-redirect
+versioning:
+  scheme: standard-version
+  detail: >-
+    Nothing here is versioned by the university. Every interface takes its version from the
+    standard it implements — OAI-PMH 2.0, IIIF Presentation 2.1, IIIF Image 2.0 level2, OpenSearch
+    1.1 — and the URI path carries the standard's major version (/iiif/2/…), not a product
+    version. The repository records interface at /api/records/ carries no version marker at all.
+  published_version_policy: false
+  api_version_header: false
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  detail: >-
+    No deprecation policy, no Sunset or Deprecation header, no advance-notice commitment on any
+    surface. The only observable deprecation practice is at the hostname level and it is handled
+    well: github.com/utda/genji-redirect is a path-preserving redirect from
+    genji.dl.itc.u-tokyo.ac.jp to genji.lib.u-tokyo.ac.jp, and utda/shelly redirects to
+    utda/shelley. Old links keep resolving. That is a real, if narrow, continuity practice.
+change_communication:
+  changelog: false
+  release_notes: false
+  status_page: false
+  detail: >-
+    The Archives Portal documentation records a single dated change in prose — "2019年10月8日に
+    マッピング設定を変更しました" (the metadata mapping configuration was changed on 8 October 2019) —
+    and warns that the per-schema field mapping is provisional and may change again. That
+    sentence is the whole change-communication surface. There is no feed, no changelog page and no
+    notification channel.
+stability:
+  archives_portal_oai:
+    earliest_datestamp: '2013-01-01T12:00:00Z'
+    deleted_record_policy: persistent
+    sets: 1957
+    detail: Thirteen years of continuously harvestable metadata with persistent deletion records.
+  repository_oai:
+    earliest_datestamp: '2017-03-28T00:00:00Z'
+    deleted_record_policy: transient
+    detail: >-
+      transient means deletion status is not guaranteed to be retained, so an incremental
+      harvester cannot rely on this endpoint to learn about withdrawals. Full re-harvest is the
+      safe posture.
+  persistent_identifiers:
+    scheme: DOI via JaLC (Japan Link Center)
+    prefix: '10.15083'
+    detail: >-
+      Every sampled repository record carries a registered DOI under the university's own prefix.
+      Persistent identification is the one lifecycle guarantee this institution actually makes,
+      and it is made at the record level rather than the interface level.

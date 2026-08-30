@@ -1,0 +1,112 @@
+x-generated: '2026-08-19'
+x-method: derived
+x-source:
+  - https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
+  - https://repository.dl.itc.u-tokyo.ac.jp/robots.txt
+  - https://repository.dl.itc.u-tokyo.ac.jp/api/records/
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/search?kywd=tokyo
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - https://www.u-tokyo.ac.jp/robots.txt
+x-operator: institution
+x-title: Consumption rules for the University of Tokyo's institution-operated surfaces
+x-note: >-
+  Not a Spectral ruleset — there is no University of Tokyo OpenAPI to lint. These are the rules a
+  client must follow to consume these surfaces correctly, each one derived from an observed
+  behaviour that would otherwise cost a caller a wrong conclusion. Several of them invert the
+  defaults a general-purpose crawler uses, which is exactly why they are written down.
+rules:
+  - id: no-browser-user-agent-on-repository
+    severity: error
+    applies_to: repository.dl.itc.u-tokyo.ac.jp
+    rule: >-
+      Do NOT send a desktop-browser User-Agent to this host. nginx returns HTTP 406 Not
+      Acceptable to Chrome-shaped User-Agents and HTTP 200 to a plain client. The block is
+      inverted from the usual bot challenge, so the standard "retry with a browser UA" heuristic
+      makes this host look dead when it is fully live.
+    evidence: >-
+      /oai?verb=Identify returned 406 (558 bytes, nginx) with a Chrome 128 UA and full browser
+      Accept headers, and 200 (806 bytes, valid OAI-PMH) with curl's default UA. Reproduced on
+      the site root as well.
+  - id: browser-user-agent-required-on-archives-assets
+    severity: warn
+    applies_to: da.dl.itc.u-tokyo.ac.jp/portal/assets
+    rule: >-
+      The opposite applies here. Item requests with _format need a browser-shaped User-Agent;
+      Apache returns 403 to a bare client on some paths. The two institution hosts have opposite
+      edge policies and a harvester must configure them separately.
+    evidence: >-
+      /portal/assets/{uuid}?_format=json returned 200 (3,131 bytes, application/ld+json) with a
+      Chrome UA. A bare client received 403 on /portal/search regardless.
+  - id: do-not-treat-search-403-as-dead
+    severity: warn
+    applies_to: da.dl.itc.u-tokyo.ac.jp/portal/search
+    rule: >-
+      The documented search API returns HTTP 403 to every external automated client. Record it as
+      blocked, not as absent — the endpoint is documented by the university, the portal's own
+      navigation links to it, and an OpenSearch description document for it is served at 200.
+    evidence: >-
+      403 (289 bytes, Apache/2.4.58) with a Chrome UA, without a UA, with and without parameters,
+      from two independent network paths including an unrelated fetch service.
+  - id: parse-oai-errors-from-the-body
+    severity: error
+    applies_to: both OAI-PMH endpoints
+    rule: >-
+      OAI-PMH returns protocol errors inside an HTTP 200. A client that branches on status code
+      alone will treat badArgument, cannotDisseminateFormat and noRecordsMatch as successes.
+      Always parse for an <error code="…"> element.
+    evidence: OAI-PMH 2.0 protocol requirement, and both deployments follow it.
+  - id: full-reharvest-the-repository
+    severity: warn
+    applies_to: repository.dl.itc.u-tokyo.ac.jp/oai
+    rule: >-
+      Identify declares deletedRecord "transient", so deletion status is not guaranteed to be
+      retained. Incremental from/until harvesting will silently miss withdrawals. Periodically
+      re-harvest in full. The Archives Portal endpoint declares "persistent" and does not have
+      this problem.
+    evidence: Identify responses from both hosts, captured 2026-08-19.
+  - id: honour-repository-robots-for-api-and-oai
+    severity: warn
+    applies_to: repository.dl.itc.u-tokyo.ac.jp
+    rule: >-
+      robots.txt disallows /api/, /oai, /search and /admin/. The /oai disallow contradicts the
+      library's own public documentation of OAI-PMH as its harvesting interface, so the file
+      reads as a stock WEKO3 default — but it is the only machine-readable access signal the host
+      publishes. Harvest at low rate, identify yourself with a real contact string, and be
+      prepared to stop on request.
+    evidence: https://repository.dl.itc.u-tokyo.ac.jp/robots.txt, HTTP 200, 614 bytes.
+  - id: read-flattened-fields-not-item-metadata
+    severity: warn
+    applies_to: repository.dl.itc.u-tokyo.ac.jp/api/records/
+    rule: >-
+      Bind to the flattened top-level metadata fields (title, creator, itemtype, accessRights,
+      identifierRegistration). Do not bind to metadata._item_metadata — its item_<id> keys are
+      deployment-specific WEKO item-type identifiers with Japanese labels and are not portable
+      across WEKO installations or stable across item-type revisions.
+    evidence: Live record 2003301 carries item_7_biblio_info_7, item_1623978586063 and similar.
+  - id: page-with-links-next
+    severity: warn
+    applies_to: repository.dl.itc.u-tokyo.ac.jp/api/records/
+    rule: >-
+      Follow links.next rather than computing page numbers, and expect HTTP 500 rather than 400
+      on an unsupported parameter — validation is not defensive and gives no machine-readable
+      reason.
+    evidence: ?size=2&format=json returned HTTP 500 with a 182-byte body.
+  - id: expect-japanese-only-documentation
+    severity: warn
+    applies_to: da.dl.itc.u-tokyo.ac.jp
+    rule: >-
+      The English API help page carries one line, "Only available in Japanese", and links to the
+      Japanese page. Every parameter, verb, format and paging rule this institution documents
+      exists only at /portal/help/api. A profile built from the English surface finds no API here
+      at all — and that is precisely how this institution's real footprint was under-counted
+      before.
+    evidence: >-
+      /portal/en/help/api returned 200 with 13,997 bytes of navigation and one sentence of
+      content; /portal/help/api returned 200 with the full parameter tables.
+  - id: search-locally-before-concluding-absence
+    severity: info
+    applies_to: all u-tokyo.ac.jp surfaces
+    rule: >-
+      Generalise the previous rule. This institution's AI guidance, its LMS, its HPC allocation
+      documentation and its archive API reference are all richer in Japanese than in English.
+      Absence on the English surface is not absence.

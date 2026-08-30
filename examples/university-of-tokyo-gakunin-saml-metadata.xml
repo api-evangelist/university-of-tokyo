@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Extract: the three University of Tokyo SAML 2.0 entities registered in the GakuNin
+     academic access federation (registrationAuthority https://www.gakunin.jp), taken from
+     https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml (HTTP 200, 5,649,623 bytes,
+     application/samlmetadata+xml, fetched 2026-08-19). Aggregate contains 650 entities;
+     3 are under u-tokyo.ac.jp. Signature and the other 647 entities omitted. -->
+<EntitiesDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+                    xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
+                    xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi"
+                    xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute"
+                    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+                    xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                    xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+                    xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol"
+                    Name="urn:mace:gakunin.jp:extract:u-tokyo.ac.jp">
+<EntityDescriptor ID="PI0143JP" entityID="https://gidp.adm.u-tokyo.ac.jp/idp/shibboleth">
+  <Extensions>
+    <mdrpi:RegistrationInfo xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" registrationAuthority="https://www.gakunin.jp" registrationInstant="2014-08-11T00:09:00Z">
+      <mdrpi:RegistrationPolicy xml:lang="en">https://www.gakunin.jp/en/join</mdrpi:RegistrationPolicy>
+      <mdrpi:RegistrationPolicy xml:lang="ja">https://www.gakunin.jp/join</mdrpi:RegistrationPolicy>
+    </mdrpi:RegistrationInfo>
+</Extensions>
+  <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:2.0:protocol">
+    <Extensions>
+      <shibmd:Scope regexp="false">u-tokyo.ac.jp</shibmd:Scope>
+      <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+        <mdui:DisplayName xml:lang="ja">東京大学</mdui:DisplayName>
+        <mdui:DisplayName xml:lang="en">The University of Tokyo</mdui:DisplayName>
+        <mdui:Keywords xml:lang="en">category:location:kanto category:organizationType:university</mdui:Keywords>
+      </mdui:UIInfo>
+    </Extensions>
+    <KeyDescriptor>
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIE1jCCA76gAwIBAgIIHFBRJSiw7M4wDQYJKoZIhvcNAQEFBQAwfTELMAkGA1UE
+BhMCSlAxETAPBgNVBAcTCEFjYWRlbWUyMSowKAYDVQQKEyFOYXRpb25hbCBJbnN0
+aXR1dGUgb2YgSW5mb3JtYXRpY3MxDTALBgNVBAsTBFVQS0kxIDAeBgNVBAsTF05J
+SSBPcGVuIERvbWFpbiBDQSAtIEcyMB4XDTE0MDcyMzAyMDIwNloXDTE2MDMyMjAy
+MTIwNlowgYMxCzAJBgNVBAYTAkpQMREwDwYDVQQHEwhBY2FkZW1lMjEgMB4GA1UE
+ChMXVGhlIFVuaXZlcnNpdHkgb2YgVG9reW8xHjAcBgNVBAsTFUFkbWluaXN0cmF0
+aW9uIEJ1cmVhdTEfMB0GA1UEAxMWZ2lkcC5hZG0udS10b2t5by5hYy5qcDCCASIw
+DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN4EzjtVhlvncXDr1tBQAQyn7PJq
+T70CclxvatLjD3X+wHQUrpS8QQdp5+RSttyA5+8dLvl6yfm66VimEBHTxkR+5oOO
+Sg/LY50rzEjsYIXcZFSySMH/B3Zd6BnN/jI85lXS9Znr46BZ6BZtKNmb3eenvMmO
+y6dNryZPVG2LVgmFmCz/5yhmXmSaoMdPND4pceuJyCjkolfUVQVmiBkmHtHOWpFb
+sAIH7pnvIyGzPwRo5S2mlf3rj01PdAaV6qB7xqA0Bo0o9KJGgAXDTd+j1Ojbql+U
+u8C0UG84YBFZvYiFRD4fTwzbUZEfr0UTH7liYoJFgwZVdN2PdK5j+gzyzI8CAwEA
+AaOCAVEwggFNMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAd
+BgNVHQ4EFgQU/Q2fW+2kmwSbu5W2pnG9daugFL4wHwYDVR0jBBgwFoAUewoH9xjK
+jA7W2rxQgGwsRwLRDfswIQYDVR0RBBowGIIWZ2lkcC5hZG0udS10b2t5by5hYy5q
+cDBmBgNVHSAEXzBdME0GCiqDCIycHgECAgEwPzA9BggrBgEFBQcCARYxaHR0cHM6
+Ly9yZXBvMS5zZWNvbXRydXN0Lm5ldC9zcGNwcC9jcHMvaW5kZXguaHRtbDAMBgoq
+gwiMmxtkhwUBMEgGA1UdHwRBMD8wPaA7oDmGN2h0dHA6Ly9yZXBvMS5zZWNvbXRy
+dXN0Lm5ldC9zcHBjYS9uaWkvb2RjYTIvZnVsbGNybC5jcmwwEQYJYIZIAYb4QgEB
+BAQDAgZAMA0GCSqGSIb3DQEBBQUAA4IBAQCUfWAAc3KvnJdD3PFfnsHxAgQJUNBO
+j6abpQxWChajrr43XBTm66PXXmcXUwnY5aazD05DpHgw8ScDFJq0WaoYKMCE2WAC
+brJ+NLhhFjMXKXsycUnRLJ6N8CIfloYAvCALuWW/4or0DPXuKcbDb4cMrZMz4U/w
+7m/HJ8oCtvrg+1UOY1RCWGU+5XshUfD+4o+/4LrRW+blkVGPRoIE+xdOuOgUGtEn
+yiGf+j79X4yKBT3GVVLTC/BOAPZfi7NlB2UrUCrn9K12pN0CW4fP7vLfXibQFLLG
+37we5+I8u9W5LNx/1yKoMCMODIgEXbjp4Ol1su2d4rmdGC/IyP72nR8y</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <KeyDescriptor>
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDRjCCAi6gAwIBAgIUWK+Gef29RiziNEH+O/DM714nwwMwDQYJKoZIhvcNAQEL
+BQAwITEfMB0GA1UEAwwWZ2lkcC5hZG0udS10b2t5by5hYy5qcDAeFw0yNDAyMDcw
+MzA0MzFaFw0zNDAyMDcwMzA0MzFaMCExHzAdBgNVBAMMFmdpZHAuYWRtLnUtdG9r
+eW8uYWMuanAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDeBM47VYZb
+53Fw69bQUAEMp+zyak+9AnJcb2rS4w91/sB0FK6UvEEHaefkUrbcgOfvHS75esn5
+uulYphAR08ZEfuaDjkoPy2OdK8xI7GCF3GRUskjB/wd2XegZzf4yPOZV0vWZ6+Og
+WegWbSjZm93np7zJjsunTa8mT1Rti1YJhZgs/+coZl5kmqDHTzQ+KXHricgo5KJX
+1FUFZogZJh7RzlqRW7ACB+6Z7yMhsz8EaOUtppX9649NT3QGleqge8agNAaNKPSi
+RoAFw03fo9To26pflLvAtFBvOGARWb2IhUQ+H08M21GRH69FEx+5YmKCRYMGVXTd
+j3SuY/oM8syPAgMBAAGjdjB0MB0GA1UdDgQWBBT9DZ9b7aSbBJu7lbamcb11q6AU
+vjAfBgNVHSMEGDAWgBT9DZ9b7aSbBJu7lbamcb11q6AUvjAPBgNVHRMBAf8EBTAD
+AQH/MCEGA1UdEQQaMBiCFmdpZHAuYWRtLnUtdG9reW8uYWMuanAwDQYJKoZIhvcN
+AQELBQADggEBAEvsQwMHSffYaxnTTjsuThNf5UX6QBeZtaICYX24d0WklW9Z7fC1
+X9fbI6mBagbU/MsvIgp9H5KMnhany8gQ4kTYxdQ2e7IL1v1eulRA1A6Pbyd4C2AL
+sNdG/YecdbU2qzcpy0+7trKBZPENg9ZV6yMgsJ54K8MzRVQMKt8iAuFtpju4DTCL
+d6Pcjq9jaO7hNA1njK+RTYpk9QacM/9p6kI6B4KaCHgxAQnJs4oD/oyV9ErJsjCk
+8SpE2B9mgoDG8dMAnAelkWhSXtFPYXlsFN7zRvUGO4mhHgxC5dcd+nwsfP4L46Lq
+PsrLbnYfQKrLX63NiuOKPTlFPJReLt5wCF4=</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+    <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+    <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://gidp.adm.u-tokyo.ac.jp/idp/profile/Shibboleth/SSO"/>
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://gidp.adm.u-tokyo.ac.jp/idp/profile/SAML2/POST/SSO"/>
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://gidp.adm.u-tokyo.ac.jp/idp/profile/SAML2/Redirect/SSO"/>
+  </IDPSSODescriptor>
+  <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+    <Extensions>
+      <shibmd:Scope regexp="false">u-tokyo.ac.jp</shibmd:Scope>
+    </Extensions>
+    <KeyDescriptor>
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIE1jCCA76gAwIBAgIIHFBRJSiw7M4wDQYJKoZIhvcNAQEFBQAwfTELMAkGA1UE
+BhMCSlAxETAPBgNVBAcTCEFjYWRlbWUyMSowKAYDVQQKEyFOYXRpb25hbCBJbnN0
+aXR1dGUgb2YgSW5mb3JtYXRpY3MxDTALBgNVBAsTBFVQS0kxIDAeBgNVBAsTF05J
+SSBPcGVuIERvbWFpbiBDQSAtIEcyMB4XDTE0MDcyMzAyMDIwNloXDTE2MDMyMjAy
+MTIwNlowgYMxCzAJBgNVBAYTAkpQMREwDwYDVQQHEwhBY2FkZW1lMjEgMB4GA1UE
+ChMXVGhlIFVuaXZlcnNpdHkgb2YgVG9reW8xHjAcBgNVBAsTFUFkbWluaXN0cmF0
+aW9uIEJ1cmVhdTEfMB0GA1UEAxMWZ2lkcC5hZG0udS10b2t5by5hYy5qcDCCASIw
+DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN4EzjtVhlvncXDr1tBQAQyn7PJq
+T70CclxvatLjD3X+wHQUrpS8QQdp5+RSttyA5+8dLvl6yfm66VimEBHTxkR+5oOO
+Sg/LY50rzEjsYIXcZFSySMH/B3Zd6BnN/jI85lXS9Znr46BZ6BZtKNmb3eenvMmO
+y6dNryZPVG2LVgmFmCz/5yhmXmSaoMdPND4pceuJyCjkolfUVQVmiBkmHtHOWpFb
+sAIH7pnvIyGzPwRo5S2mlf3rj01PdAaV6qB7xqA0Bo0o9KJGgAXDTd+j1Ojbql+U
+u8C0UG84YBFZvYiFRD4fTwzbUZEfr0UTH7liYoJFgwZVdN2PdK5j+gzyzI8CAwEA
+AaOCAVEwggFNMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAd
+BgNVHQ4EFgQU/Q2fW+2kmwSbu5W2pnG9daugFL4wHwYDVR0jBBgwFoAUewoH9xjK
+jA7W2rxQgGwsRwLRDfswIQYDVR0RBBowGIIWZ2lkcC5hZG0udS10b2t5by5hYy5q
+cDBmBgNVHSAEXzBdME0GCiqDCIycHgECAgEwPzA9BggrBgEFBQcCARYxaHR0cHM6
+Ly9yZXBvMS5zZWNvbXRydXN0Lm5ldC9zcGNwcC9jcHMvaW5kZXguaHRtbDAMBgoq
+gwiMmxtkhwUBMEgGA1UdHwRBMD8wPaA7oDmGN2h0dHA6Ly9yZXBvMS5zZWNvbXRy
+dXN0Lm5ldC9zcHBjYS9uaWkvb2RjYTIvZnVsbGNybC5jcmwwEQYJYIZIAYb4QgEB
+BAQDAgZAMA0GCSqGSIb3DQEBBQUAA4IBAQCUfWAAc3KvnJdD3PFfnsHxAgQJUNBO
+j6abpQxWChajrr43XBTm66PXXmcXUwnY5aazD05DpHgw8ScDFJq0WaoYKMCE2WAC
+brJ+NLhhFjMXKXsycUnRLJ6N8CIfloYAvCALuWW/4or0DPXuKcbDb4cMrZMz4U/w
+7m/HJ8oCtvrg+1UOY1RCWGU+5XshUfD+4o+/4LrRW+blkVGPRoIE+xdOuOgUGtEn
+yiGf+j79X4yKBT3GVVLTC/BOAPZfi7NlB2UrUCrn9K12pN0CW4fP7vLfXibQFLLG
+37we5+I8u9W5LNx/1yKoMCMODIgEXbjp4Ol1su2d4rmdGC/IyP72nR8y</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <KeyDescriptor>
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDRjCCAi6gAwIBAgIUWK+Gef29RiziNEH+O/DM714nwwMwDQYJKoZIhvcNAQEL
+BQAwITEfMB0GA1UEAwwWZ2lkcC5hZG0udS10b2t5by5hYy5qcDAeFw0yNDAyMDcw
+MzA0MzFaFw0zNDAyMDcwMzA0MzFaMCExHzAdBgNVBAMMFmdpZHAuYWRtLnUtdG9r
+eW8uYWMuanAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDeBM47VYZb
+53Fw69bQUAEMp+zyak+9AnJcb2rS4w91/sB0FK6UvEEHaefkUrbcgOfvHS75esn5
+uulYphAR08ZEfuaDjkoPy2OdK8xI7GCF3GRUskjB/wd2XegZzf4yPOZV0vWZ6+Og
+WegWbSjZm93np7zJjsunTa8mT1Rti1YJhZgs/+coZl5kmqDHTzQ+KXHricgo5KJX
+1FUFZogZJh7RzlqRW7ACB+6Z7yMhsz8EaOUtppX9649NT3QGleqge8agNAaNKPSi
+RoAFw03fo9To26pflLvAtFBvOGARWb2IhUQ+H08M21GRH69FEx+5YmKCRYMGVXTd
+j3SuY/oM8syPAgMBAAGjdjB0MB0GA1UdDgQWBBT9DZ9b7aSbBJu7lbamcb11q6AU
+vjAfBgNVHSMEGDAWgBT9DZ9b7aSbBJu7lbamcb11q6AUvjAPBgNVHRMBAf8EBTAD
+AQH/MCEGA1UdEQQaMBiCFmdpZHAuYWRtLnUtdG9reW8uYWMuanAwDQYJKoZIhvcN
+AQELBQADggEBAEvsQwMHSffYaxnTTjsuThNf5UX6QBeZtaICYX24d0WklW9Z7fC1
+X9fbI6mBagbU/MsvIgp9H5KMnhany8gQ4kTYxdQ2e7IL1v1eulRA1A6Pbyd4C2AL
+sNdG/YecdbU2qzcpy0+7trKBZPENg9ZV6yMgsJ54K8MzRVQMKt8iAuFtpju4DTCL
+d6Pcjq9jaO7hNA1njK+RTYpk9QacM/9p6kI6B4KaCHgxAQnJs4oD/oyV9ErJsjCk
+8SpE2B9mgoDG8dMAnAelkWhSXtFPYXlsFN7zRvUGO4mhHgxC5dcd+nwsfP4L46Lq
+PsrLbnYfQKrLX63NiuOKPTlFPJReLt5wCF4=</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://gidp.adm.u-tokyo.ac.jp:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
+    <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://gidp.adm.u-tokyo.ac.jp:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
+    <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+    <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+  </AttributeAuthorityDescriptor>
+  <Organization>
+    <OrganizationName xml:lang="en">The University of Tokyo</OrganizationName>
+    <OrganizationName xml:lang="ja">東京大学</OrganizationName>
+    <OrganizationDisplayName xml:lang="en">The University of Tokyo</OrganizationDisplayName>
+    <OrganizationDisplayName xml:lang="ja">東京大学</OrganizationDisplayName>
+    <OrganizationURL xml:lang="en">http://www.u-tokyo.ac.jp</OrganizationURL>
+  </Organization>
+  <ContactPerson contactType="technical">
+    <SurName>Division for Information and Communication Systems</SurName>
+    <EmailAddress>mailto:systemshien.adm@gs.mail.u-tokyo.ac.jp</EmailAddress>
+  </ContactPerson>
+</EntityDescriptor>
+<EntityDescriptor ID="PI0255JP" entityID="https://shibbi.pki.itc.u-tokyo.ac.jp/idp/shibboleth">
+  <Extensions>
+    <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
+      <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="urn:oasis:names:tc:SAML:attribute:assurance-certification" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+        <saml:AttributeValue>https://refeds.org/sirtfi</saml:AttributeValue>
+      </saml:Attribute>
+      <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="http://macedir.org/entity-category-support" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+        <saml:AttributeValue>http://refeds.org/category/research-and-scholarship</saml:AttributeValue>
+      </saml:Attribute>
+    </mdattr:EntityAttributes>
+    <mdrpi:RegistrationInfo xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" registrationAuthority="https://www.gakunin.jp" registrationInstant="2020-03-18T04:21:52Z">
+      <mdrpi:RegistrationPolicy xml:lang="en">https://www.gakunin.jp/en/join</mdrpi:RegistrationPolicy>
+      <mdrpi:RegistrationPolicy xml:lang="ja">https://www.gakunin.jp/join</mdrpi:RegistrationPolicy>
+    </mdrpi:RegistrationInfo>
+</Extensions>
+  <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:2.0:protocol">
+    <Extensions>
+      <shibmd:Scope regexp="false">shibbi.pki.itc.u-tokyo.ac.jp</shibmd:Scope>
+      <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+        <mdui:DisplayName xml:lang="ja">KAGRA</mdui:DisplayName>
+        <mdui:DisplayName xml:lang="en">KAGRA</mdui:DisplayName>
+        <mdui:Keywords xml:lang="en">category:location:others category:organizationType:researchInstitution category:organizationType:others</mdui:Keywords>
+      </mdui:UIInfo>
+    </Extensions>
+    <KeyDescriptor>
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIHMzCCBhugAwIBAgIQCx8Qph+Z0A2o69qyLjhC5DANBgkqhkiG9w0BAQsFADBa
+MQswCQYDVQQGEwJKUDElMCMGA1UEChMcU0VDT00gVHJ1c3QgU3lzdGVtcyBDTy4s
+TFRELjEkMCIGA1UEAxMbTklJIE9wZW4gRG9tYWluIENBIC0gRzcgUlNBMB4XDTI1
+MDUxNjAxMjgyOFoXDTI2MDYxNjAxMjgyOFowejELMAkGA1UEBhMCSlAxDjAMBgNV
+BAgTBVRva3lvMRIwEAYDVQQHEwlCdW5reW8ta3UxIDAeBgNVBAoTF1RoZSBVbml2
+ZXJzaXR5IG9mIFRva3lvMSUwIwYDVQQDExxzaGliYmkucGtpLml0Yy51LXRva3lv
+LmFjLmpwMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv/VypN2NxMpt
+RDKFJo5Rzmnyg93Ux+rxsUZCH/UFpC23GvIia0WhBPrHwOxaInVZIeb4XeY3qVEQ
+KrqXsHcu9DDxTk/ILB91AL1KMdTwraC4sngPKpOAkUJjESRqni9WslOnScPXwzFH
+cWnB9cmkXEAIyit5pFXeKtNIeRUWqE8N2prKeB6OEFTcszplIY72yY7jtluI13pv
+pGy8ODLOta218bLxrJFnRaxGEV9H06JNRifgLKqBnsTQdgV6hR2A5xNYI5A10lNT
+wOaHl81xXaEGwQOX9rrbKnvEHyDJ3bEXf1v9U5lkBUisvqwE/B0j6MVg9f+p63++
+LebZvzMhjwIDAQABo4ID0zCCA88wHwYDVR0jBBgwFoAUsC7lUe38Ss+jh/ETkHYt
+nY6UoeMwgYoGCCsGAQUFBwEBBH4wfDBKBggrBgEFBQcwAoY+aHR0cDovL3JlcG8x
+LnNlY29tdHJ1c3QubmV0L3NwcGNhL25paS9vZGNhNC9uaWktb2RjYTRnN3JzYS5j
+ZXIwLgYIKwYBBQUHMAGGImh0dHA6Ly9uaWlnN3JzYS5vY3NwLnNlY29tLWNlcnQu
+anAwJwYDVR0RBCAwHoIcc2hpYmJpLnBraS5pdGMudS10b2t5by5hYy5qcDBdBgNV
+HSAEVjBUMEgGCiqDCIybG26BVgMwOjA4BggrBgEFBQcCARYsaHR0cDovL3JlcG8x
+LnNlY29tdHJ1c3QubmV0L3NwcGNhL25paS9vZGNhNC8wCAYGZ4EMAQICMB0GA1Ud
+JQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjBNBgNVHR8ERjBEMEKgQKA+hjxodHRw
+Oi8vcmVwbzEuc2Vjb210cnVzdC5uZXQvc3BwY2EvbmlpL29kY2E0L2Z1bGxjcmxn
+N3JzYS5jcmwwHQYDVR0OBBYEFKxeGysFHiHXjSDNCtmlOqJUR8ZgMA4GA1UdDwEB
+/wQEAwIFoDCCAfgGCisGAQQB1nkCBAIEggHoBIIB5AHiAHYADleUvPOuqT4zGyyZ
+B7P3kN+bwj1xMiXdIaklrGHFTiEAAAGW1r4sXQAABAMARzBFAiBZ0gNmbNF+KFXq
+KnNji0Yq768BpzUbez3L7r3KdrN5kwIhAMSQqNvXOHRrH6G//kMgQkjSvuDlieaM
+0O8XZOcsVWWfAHYAlpdkv1VYl633Q4doNwhCd+nwOtX2pPM2bkakPw/KqcYAAAGW
+1r4yxAAABAMARzBFAiEA5tRy8tLAafb/G9ALozxAs++hN24qX23pGELoylJir0wC
+ICLaCKA8lhNid4wg9BVOc4uj0MVwTJ0hf302WMJlZ9kaAHcAZBHEbKQS7KeJHKIC
+LgC8q08oB9QeNSer6v7VA8l9zfAAAAGW1r41YQAABAMASDBGAiEA5wbhk8aNvkxz
+urSz+lkchUvwHhvXvJe8GL/L2IW1aZMCIQCA207eYzYdUj2V13gNR8su6Tcx5tCE
+YHo3RM932L/75QB3AMs49xWJfIShRF9bwd37yW7ymlnNRwppBYWwyxTDFFjnAAAB
+lta+NygAAAQDAEgwRgIhANJIqXSMZUxoyeDMAOpyxnTExsAtYhpzRNv/A3fzytQ0
+AiEAhfovkZDAOZahTXggJgtYyVJRM4Iv9/4PORdkSPasyCYwDQYJKoZIhvcNAQEL
+BQADggEBAB7kLOnOwCcgZ4GaNHq19BiOzpXhQFar5RuZpErMrIxOynTtUIksyaTk
+xY+O5k9wRBOZGTTPCd9gvXycWGpZP03/mp1nMN0+4pWM2h0Rr7Y2/SD0aJMKNh1z
+BrzqIvqISqE+BbtwYXeawVaMGzikdiNAPF2cwef/PBEaE8r/Pv2bGMmcmZKOczEY
+xzmKdizI6VbPiapMVls5L6i+YYWcAfuUXsLFvJ5Vl1yqPqYIo2GKEoH5FeX+pOA8
+111E03JgBAFxvUPP4h52zsnLiYw9PkAm2GxBpwsqWa6wfWucthwR+Cg0tfIjvcK9
+x9TAGHGCZAO+ylLVwEPX/9wPe4pzzxc=</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <KeyDescriptor>
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIINjCCBh6gAwIBAgIQZFBGIn1bQzJ+LHs0PcKrDTANBgkqhkiG9w0BAQsFADBb
+MQswCQYDVQQGEwJKUDEmMCQGA1UEChMdU0VDT00gVHJ1c3QgU3lzdGVtcyBDby4s
+IEx0ZC4xJDAiBgNVBAMTG05JSSBPcGVuIERvbWFpbiBDQSAtIEc4IFJTQTAeFw0y
+NjAyMDMwMTUzMjBaFw0yNzAzMDYwMTUzMjBaMHoxCzAJBgNVBAYTAkpQMQ4wDAYD
+VQQIEwVUb2t5bzESMBAGA1UEBxMJQnVua3lvLWt1MSAwHgYDVQQKExdUaGUgVW5p
+dmVyc2l0eSBvZiBUb2t5bzElMCMGA1UEAxMcc2hpYmJpLnBraS5pdGMudS10b2t5
+by5hYy5qcDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKE4ikTtz3nm
+38ytXTYL6+Il1EFara2AdoG6k/XB/sACnq6zTnusB+nl9m2ecs6AG6jw/hEHWal9
+ECKCacw0B36MN8BUiJmiX8el8Xk2ngBYbM+Ij/HPVjUrYUkOZopnCpmoTo6TZl1P
+YcBrXakh2KAXV+tYvW5ZL7dcW1zGM2OF5epXIEB/f3mUhvkF1HA1Xevl+94WAeQL
+DEHjHStDDFhXM9PoNHno8GyTITfZBqfaCpxOovsnICyk7OHUljFJ/Phsczq2yzgP
+Lr0aMGwNSoIlO4jKUBEc5K6XJghKvq/rRJ0K7bhaXJujYtjnKzgNZrJ+wjoGhuoz
+zwF/IkR44pkCAwEAAaOCA9UwggPRMB8GA1UdIwQYMBaAFJKqOLEYWitcS+ehCkCl
+8kQp2MBTMIGKBggrBgEFBQcBAQR+MHwwSgYIKwYBBQUHMAKGPmh0dHA6Ly9yZXBv
+MS5zZWNvbXRydXN0Lm5ldC9zcHBjYS9uaWkvb2RjYTQvbmlpLW9kY2E0Zzhyc2Eu
+Y2VyMC4GCCsGAQUFBzABhiJodHRwOi8vbmlpZzhyc2Eub2NzcC5zZWNvbS1jZXJ0
+LmpwMCcGA1UdEQQgMB6CHHNoaWJiaS5wa2kuaXRjLnUtdG9reW8uYWMuanAwEwYD
+VR0gBAwwCjAIBgZngQwBAgIwEwYDVR0lBAwwCgYIKwYBBQUHAwEwTQYDVR0fBEYw
+RDBCoECgPoY8aHR0cDovL3JlcG8xLnNlY29tdHJ1c3QubmV0L3NwcGNhL25paS9v
+ZGNhNC9mdWxsY3JsZzhyc2EuY3JsMA4GA1UdDwEB/wQEAwIFoDCCAm0GCisGAQQB
+1nkCBAIEggJdBIICWQJXAHUA1tWNqdAXU/NqSqDHV0kCr+vH3CzTjNn3ZMgMiRke
+nwIAAAGcIT1y4gAABAMARjBEAiBBEsnRVNIV+IstHJlJo8P9YBI/u4yfKXX8NAFA
+3JTsMgIgaUHK5Mn9e3svRX02o55uwnpTffSKCFJBV8hNw8y6vgEAdgBEwr0M6RQO
+ZKXJSgGTClqhuzWXDgDuERaJaCocRNe1ZgAAAZwhPXXcAAAEAwBHMEUCIQDNQPb5
+A06uCPdEkAcNAjfOJvOOsaDxUPaP5soiUe6pIwIgE3g7TX+bocggO8Bcr1kVl1QV
+q7nAlxVylNkWUKvxwjIAdgBMY9yY5Zwdq4j2Hoo93q6Pq0SjN3tfm5TD+6Gc/MG+
+JgAAAZwhPXbsAAAEAwBHMEUCIDeIbNia1ShiEuGuPglzGZogL7hryEjMs/w62eQ1
+2SFJAiEAmj8AwAcsIg4RMcNOjpuM/EdniwAVDBJbmX+li09e1BwAdgAcn2gs6frw
+RWlQ+BuWiofd2zIQ2EzmyLLjglJKxM9ZnwAAAZwhPXf3AAAEAwBHMEUCIG47t9BM
+e2yIonUqmitthfskq9sFct5L1T61T5tQajoJAiEAlaHVZsjwv1PLM6Vwt68l+0HL
+U2hyJnkt978nJN9+ow4AdgBgTJqven93XwHUBvySDciZ6wscffjJUhv6+hd3O5eL
+yQAAAZwhPXxJAAAEAwBHMEUCIFeWGDnyRT+mCHHdCMrUg7N8lYiwkS8aOwRlUP0S
+bZfhAiEA4w7R48xxe+WBia3RaiVPs5FH/4VcugXqyghDctROPaMwDQYJKoZIhvcN
+AQELBQADggIBAEi2ChtIv8wGzEDJTWRjHhyhagrpL1GzXkLjMnyRr0j0ZWGF6sbg
+EUdS9yFXySu3diNGeJrQGfnokhs8D/xnzUan3INsjexrKKqFKN4+6eSiReUSxJmE
+CJeo3CrtQR5uUtA0350oGADEUf7hRoj0Jy2IqND/ZWb9K05gpwRupNxbjQI/+ase
+aKMG724AnCfkcMrE4faaVKc0ESga8P0ZXWbj7yyZgUdS/0tNxJb+/4YTHEBRlFrJ
+VxSw9eJIJhSBc/lQQFMswzUv4kapqs/yqsgVV8T/s5x4ykhGJT3O9SNCmxBMYmYX
+tUASYFeajjFAH8L16zH+H6BzwDv3khKxTD6P94c/d911yYQDS04hjjS76P7ATW+v
+fxzgYj3uuQRDSMTM58VkQaSOFvCwqh8VOHOFIF+cWd1dN2pXLpxghDaXbEmR/uN0
+9feEcnXuxwo70tBUUqGTeN0zUzDEXsTTlEZJOl6L3MqO7CucSYvkot1dbqBRGp1o
+4jDx5frnQaVFCwTZ66Px6i14rDyUEhJ5HSEFYnlBZ72Vk4X0R+Ok3DzDc13NONd+
+Y2iYWEMes1KL5ogwUIayHzO7X6dUD5leIkcQdrk/AOHs2+Fu8XQTegb6GrekSO9A
+l3bcocWE3KjnIjSQYTrIXmTFKAuw87LlBHkWREkth9cLbYqqr8kB7ygD</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+    <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+    <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://shibbi.pki.itc.u-tokyo.ac.jp/idp/profile/Shibboleth/SSO"/>
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://shibbi.pki.itc.u-tokyo.ac.jp/idp/profile/SAML2/POST/SSO"/>
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://shibbi.pki.itc.u-tokyo.ac.jp/idp/profile/SAML2/Redirect/SSO"/>
+  </IDPSSODescriptor>
+  <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+    <Extensions>
+      <shibmd:Scope regexp="false">shibbi.pki.itc.u-tokyo.ac.jp</shibmd:Scope>
+    </Extensions>
+    <KeyDescriptor>
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIHMzCCBhugAwIBAgIQCx8Qph+Z0A2o69qyLjhC5DANBgkqhkiG9w0BAQsFADBa
+MQswCQYDVQQGEwJKUDElMCMGA1UEChMcU0VDT00gVHJ1c3QgU3lzdGVtcyBDTy4s
+TFRELjEkMCIGA1UEAxMbTklJIE9wZW4gRG9tYWluIENBIC0gRzcgUlNBMB4XDTI1
+MDUxNjAxMjgyOFoXDTI2MDYxNjAxMjgyOFowejELMAkGA1UEBhMCSlAxDjAMBgNV
+BAgTBVRva3lvMRIwEAYDVQQHEwlCdW5reW8ta3UxIDAeBgNVBAoTF1RoZSBVbml2
+ZXJzaXR5IG9mIFRva3lvMSUwIwYDVQQDExxzaGliYmkucGtpLml0Yy51LXRva3lv
+LmFjLmpwMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv/VypN2NxMpt
+RDKFJo5Rzmnyg93Ux+rxsUZCH/UFpC23GvIia0WhBPrHwOxaInVZIeb4XeY3qVEQ
+KrqXsHcu9DDxTk/ILB91AL1KMdTwraC4sngPKpOAkUJjESRqni9WslOnScPXwzFH
+cWnB9cmkXEAIyit5pFXeKtNIeRUWqE8N2prKeB6OEFTcszplIY72yY7jtluI13pv
+pGy8ODLOta218bLxrJFnRaxGEV9H06JNRifgLKqBnsTQdgV6hR2A5xNYI5A10lNT
+wOaHl81xXaEGwQOX9rrbKnvEHyDJ3bEXf1v9U5lkBUisvqwE/B0j6MVg9f+p63++
+LebZvzMhjwIDAQABo4ID0zCCA88wHwYDVR0jBBgwFoAUsC7lUe38Ss+jh/ETkHYt
+nY6UoeMwgYoGCCsGAQUFBwEBBH4wfDBKBggrBgEFBQcwAoY+aHR0cDovL3JlcG8x
+LnNlY29tdHJ1c3QubmV0L3NwcGNhL25paS9vZGNhNC9uaWktb2RjYTRnN3JzYS5j
+ZXIwLgYIKwYBBQUHMAGGImh0dHA6Ly9uaWlnN3JzYS5vY3NwLnNlY29tLWNlcnQu
+anAwJwYDVR0RBCAwHoIcc2hpYmJpLnBraS5pdGMudS10b2t5by5hYy5qcDBdBgNV
+HSAEVjBUMEgGCiqDCIybG26BVgMwOjA4BggrBgEFBQcCARYsaHR0cDovL3JlcG8x
+LnNlY29tdHJ1c3QubmV0L3NwcGNhL25paS9vZGNhNC8wCAYGZ4EMAQICMB0GA1Ud
+JQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjBNBgNVHR8ERjBEMEKgQKA+hjxodHRw
+Oi8vcmVwbzEuc2Vjb210cnVzdC5uZXQvc3BwY2EvbmlpL29kY2E0L2Z1bGxjcmxn
+N3JzYS5jcmwwHQYDVR0OBBYEFKxeGysFHiHXjSDNCtmlOqJUR8ZgMA4GA1UdDwEB
+/wQEAwIFoDCCAfgGCisGAQQB1nkCBAIEggHoBIIB5AHiAHYADleUvPOuqT4zGyyZ
+B7P3kN+bwj1xMiXdIaklrGHFTiEAAAGW1r4sXQAABAMARzBFAiBZ0gNmbNF+KFXq
+KnNji0Yq768BpzUbez3L7r3KdrN5kwIhAMSQqNvXOHRrH6G//kMgQkjSvuDlieaM
+0O8XZOcsVWWfAHYAlpdkv1VYl633Q4doNwhCd+nwOtX2pPM2bkakPw/KqcYAAAGW
+1r4yxAAABAMARzBFAiEA5tRy8tLAafb/G9ALozxAs++hN24qX23pGELoylJir0wC
+ICLaCKA8lhNid4wg9BVOc4uj0MVwTJ0hf302WMJlZ9kaAHcAZBHEbKQS7KeJHKIC
+LgC8q08oB9QeNSer6v7VA8l9zfAAAAGW1r41YQAABAMASDBGAiEA5wbhk8aNvkxz
+urSz+lkchUvwHhvXvJe8GL/L2IW1aZMCIQCA207eYzYdUj2V13gNR8su6Tcx5tCE
+YHo3RM932L/75QB3AMs49xWJfIShRF9bwd37yW7ymlnNRwppBYWwyxTDFFjnAAAB
+lta+NygAAAQDAEgwRgIhANJIqXSMZUxoyeDMAOpyxnTExsAtYhpzRNv/A3fzytQ0
+AiEAhfovkZDAOZahTXggJgtYyVJRM4Iv9/4PORdkSPasyCYwDQYJKoZIhvcNAQEL
+BQADggEBAB7kLOnOwCcgZ4GaNHq19BiOzpXhQFar5RuZpErMrIxOynTtUIksyaTk
+xY+O5k9wRBOZGTTPCd9gvXycWGpZP03/mp1nMN0+4pWM2h0Rr7Y2/SD0aJMKNh1z
+BrzqIvqISqE+BbtwYXeawVaMGzikdiNAPF2cwef/PBEaE8r/Pv2bGMmcmZKOczEY
+xzmKdizI6VbPiapMVls5L6i+YYWcAfuUXsLFvJ5Vl1yqPqYIo2GKEoH5FeX+pOA8
+111E03JgBAFxvUPP4h52zsnLiYw9PkAm2GxBpwsqWa6wfWucthwR+Cg0tfIjvcK9
+x9TAGHGCZAO+ylLVwEPX/9wPe4pzzxc=</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <KeyDescriptor>
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIINjCCBh6gAwIBAgIQZFBGIn1bQzJ+LHs0PcKrDTANBgkqhkiG9w0BAQsFADBb
+MQswCQYDVQQGEwJKUDEmMCQGA1UEChMdU0VDT00gVHJ1c3QgU3lzdGVtcyBDby4s
+IEx0ZC4xJDAiBgNVBAMTG05JSSBPcGVuIERvbWFpbiBDQSAtIEc4IFJTQTAeFw0y
+NjAyMDMwMTUzMjBaFw0yNzAzMDYwMTUzMjBaMHoxCzAJBgNVBAYTAkpQMQ4wDAYD
+VQQIEwVUb2t5bzESMBAGA1UEBxMJQnVua3lvLWt1MSAwHgYDVQQKExdUaGUgVW5p
+dmVyc2l0eSBvZiBUb2t5bzElMCMGA1UEAxMcc2hpYmJpLnBraS5pdGMudS10b2t5
+by5hYy5qcDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKE4ikTtz3nm
+38ytXTYL6+Il1EFara2AdoG6k/XB/sACnq6zTnusB+nl9m2ecs6AG6jw/hEHWal9
+ECKCacw0B36MN8BUiJmiX8el8Xk2ngBYbM+Ij/HPVjUrYUkOZopnCpmoTo6TZl1P
+YcBrXakh2KAXV+tYvW5ZL7dcW1zGM2OF5epXIEB/f3mUhvkF1HA1Xevl+94WAeQL
+DEHjHStDDFhXM9PoNHno8GyTITfZBqfaCpxOovsnICyk7OHUljFJ/Phsczq2yzgP
+Lr0aMGwNSoIlO4jKUBEc5K6XJghKvq/rRJ0K7bhaXJujYtjnKzgNZrJ+wjoGhuoz
+zwF/IkR44pkCAwEAAaOCA9UwggPRMB8GA1UdIwQYMBaAFJKqOLEYWitcS+ehCkCl
+8kQp2MBTMIGKBggrBgEFBQcBAQR+MHwwSgYIKwYBBQUHMAKGPmh0dHA6Ly9yZXBv
+MS5zZWNvbXRydXN0Lm5ldC9zcHBjYS9uaWkvb2RjYTQvbmlpLW9kY2E0Zzhyc2Eu
+Y2VyMC4GCCsGAQUFBzABhiJodHRwOi8vbmlpZzhyc2Eub2NzcC5zZWNvbS1jZXJ0
+LmpwMCcGA1UdEQQgMB6CHHNoaWJiaS5wa2kuaXRjLnUtdG9reW8uYWMuanAwEwYD
+VR0gBAwwCjAIBgZngQwBAgIwEwYDVR0lBAwwCgYIKwYBBQUHAwEwTQYDVR0fBEYw
+RDBCoECgPoY8aHR0cDovL3JlcG8xLnNlY29tdHJ1c3QubmV0L3NwcGNhL25paS9v
+ZGNhNC9mdWxsY3JsZzhyc2EuY3JsMA4GA1UdDwEB/wQEAwIFoDCCAm0GCisGAQQB
+1nkCBAIEggJdBIICWQJXAHUA1tWNqdAXU/NqSqDHV0kCr+vH3CzTjNn3ZMgMiRke
+nwIAAAGcIT1y4gAABAMARjBEAiBBEsnRVNIV+IstHJlJo8P9YBI/u4yfKXX8NAFA
+3JTsMgIgaUHK5Mn9e3svRX02o55uwnpTffSKCFJBV8hNw8y6vgEAdgBEwr0M6RQO
+ZKXJSgGTClqhuzWXDgDuERaJaCocRNe1ZgAAAZwhPXXcAAAEAwBHMEUCIQDNQPb5
+A06uCPdEkAcNAjfOJvOOsaDxUPaP5soiUe6pIwIgE3g7TX+bocggO8Bcr1kVl1QV
+q7nAlxVylNkWUKvxwjIAdgBMY9yY5Zwdq4j2Hoo93q6Pq0SjN3tfm5TD+6Gc/MG+
+JgAAAZwhPXbsAAAEAwBHMEUCIDeIbNia1ShiEuGuPglzGZogL7hryEjMs/w62eQ1
+2SFJAiEAmj8AwAcsIg4RMcNOjpuM/EdniwAVDBJbmX+li09e1BwAdgAcn2gs6frw
+RWlQ+BuWiofd2zIQ2EzmyLLjglJKxM9ZnwAAAZwhPXf3AAAEAwBHMEUCIG47t9BM
+e2yIonUqmitthfskq9sFct5L1T61T5tQajoJAiEAlaHVZsjwv1PLM6Vwt68l+0HL
+U2hyJnkt978nJN9+ow4AdgBgTJqven93XwHUBvySDciZ6wscffjJUhv6+hd3O5eL
+yQAAAZwhPXxJAAAEAwBHMEUCIFeWGDnyRT+mCHHdCMrUg7N8lYiwkS8aOwRlUP0S
+bZfhAiEA4w7R48xxe+WBia3RaiVPs5FH/4VcugXqyghDctROPaMwDQYJKoZIhvcN
+AQELBQADggIBAEi2ChtIv8wGzEDJTWRjHhyhagrpL1GzXkLjMnyRr0j0ZWGF6sbg
+EUdS9yFXySu3diNGeJrQGfnokhs8D/xnzUan3INsjexrKKqFKN4+6eSiReUSxJmE
+CJeo3CrtQR5uUtA0350oGADEUf7hRoj0Jy2IqND/ZWb9K05gpwRupNxbjQI/+ase
+aKMG724AnCfkcMrE4faaVKc0ESga8P0ZXWbj7yyZgUdS/0tNxJb+/4YTHEBRlFrJ
+VxSw9eJIJhSBc/lQQFMswzUv4kapqs/yqsgVV8T/s5x4ykhGJT3O9SNCmxBMYmYX
+tUASYFeajjFAH8L16zH+H6BzwDv3khKxTD6P94c/d911yYQDS04hjjS76P7ATW+v
+fxzgYj3uuQRDSMTM58VkQaSOFvCwqh8VOHOFIF+cWd1dN2pXLpxghDaXbEmR/uN0
+9feEcnXuxwo70tBUUqGTeN0zUzDEXsTTlEZJOl6L3MqO7CucSYvkot1dbqBRGp1o
+4jDx5frnQaVFCwTZ66Px6i14rDyUEhJ5HSEFYnlBZ72Vk4X0R+Ok3DzDc13NONd+
+Y2iYWEMes1KL5ogwUIayHzO7X6dUD5leIkcQdrk/AOHs2+Fu8XQTegb6GrekSO9A
+l3bcocWE3KjnIjSQYTrIXmTFKAuw87LlBHkWREkth9cLbYqqr8kB7ygD</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://shibbi.pki.itc.u-tokyo.ac.jp:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
+    <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://shibbi.pki.itc.u-tokyo.ac.jp:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
+    <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+    <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+  </AttributeAuthorityDescriptor>
+  <Organization>
+    <OrganizationName xml:lang="en">The University of Tokyo</OrganizationName>
+    <OrganizationName xml:lang="ja">東京大学</OrganizationName>
+    <OrganizationDisplayName xml:lang="en">KAGRA</OrganizationDisplayName>
+    <OrganizationDisplayName xml:lang="ja">KAGRA</OrganizationDisplayName>
+    <OrganizationURL xml:lang="en">https://www.u-tokyo.ac.jp/</OrganizationURL>
+  </Organization>
+  <ContactPerson contactType="technical">
+    <SurName>Operation Team</SurName>
+    <EmailAddress>mailto:kagra-idp-contact@icrr.u-tokyo.ac.jp</EmailAddress>
+  </ContactPerson>
+  <ContactPerson xmlns:remd="http://refeds.org/metadata" contactType="other" remd:contactType="http://refeds.org/metadata/contactType/security">
+    <GivenName>CSIRT</GivenName>
+    <EmailAddress>mailto:schuko@satolab.itc.u-tokyo.ac.jp</EmailAddress>
+  </ContactPerson>
+</EntityDescriptor>
+<EntityDescriptor ID="PS0284JP" entityID="https://step10.adm.s.u-tokyo.ac.jp/shibboleth-sp">
+  <Extensions>
+    <mdrpi:RegistrationInfo xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" registrationAuthority="https://www.gakunin.jp" registrationInstant="2024-01-17T00:04:50Z">
+      <mdrpi:RegistrationPolicy xml:lang="en">https://www.gakunin.jp/en/join</mdrpi:RegistrationPolicy>
+      <mdrpi:RegistrationPolicy xml:lang="ja">https://www.gakunin.jp/join</mdrpi:RegistrationPolicy>
+    </mdrpi:RegistrationInfo>
+</Extensions>
+  <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
+    <Extensions>
+      <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://step10.adm.s.u-tokyo.ac.jp/Shibboleth.sso/DS" index="1"/>
+      <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+        <mdui:DisplayName xml:lang="ja">STEP10聴講申請システム</mdui:DisplayName>
+        <mdui:DisplayName xml:lang="en">STEP10 course registration system</mdui:DisplayName>
+        <mdui:Description xml:lang="ja">国立大学法人10大学大学院理学研究科等間学生交流プログラムにおける聴講希望申請システム</mdui:Description>
+        <mdui:InformationURL xml:lang="ja">https://step10.adm.s.u-tokyo.ac.jp/</mdui:InformationURL>
+        <mdui:InformationURL xml:lang="en">https://step10.adm.s.u-tokyo.ac.jp/</mdui:InformationURL>
+      </mdui:UIInfo>
+      <RequestedAttributeExtension xmlns="http://www.gakunin.jp/ns/uapprove-jp/metadata" FriendlyName="eduPersonPrincipalName">
+        <Description xml:lang="ja">認証された個人を特定し、あらかじめ管理画面で登録されたマスターテーブルと照合するのに使用する</Description>
+      </RequestedAttributeExtension>
+    </Extensions>
+    <KeyDescriptor>
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIEUjCCArqgAwIBAgIUMBM7ezYCgPK4Vnj12z+sUnq71IcwDQYJKoZIhvcNAQEL
+BQAwJTEjMCEGA1UEAxMac3RlcDEwLmFkbS5zLnUtdG9reW8uYWMuanAwHhcNMjYw
+MTA2MDE0OTQ4WhcNMzYwMTA0MDE0OTQ4WjAlMSMwIQYDVQQDExpzdGVwMTAuYWRt
+LnMudS10b2t5by5hYy5qcDCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGB
+AJwr4/P8AGVE2L6vctTFaGPywDjypoIkdnXiMA8yF2LpJ3si6cBD4N/kKcdkFQiB
+iNlrxuWikINKKcbDQwOwTqcFjrHsmyimZd1xuxaBBPXPKjH69u7xRFgIlv7k4t4e
+RFymhb2Yl+2NnwVRFw/Zih1nVrLaM2SUja+tci0CaLtg+BExyXAgm4SZwGROhfhr
+d2/2kCYWDTQ0xbxrts8Boz8Spej6ue3TK6z+iQTeDGtAQqoTqokkK+9cOsdbPURV
+ZuTsoywmtpbkWAbJC3W8184cqHoKTjgcRct5Pl1pyHrlkM52Ly9lRXtQjrvaYXw1
+/+BeKZiAF7HxjRUDdR0btD0ySo9Ftf47gqC2qsdmwHG/6xvi+mEm3G2vVOG/MN48
+72iSCO7jUFAj1oE949+FNd7RI3b8ffswacn/aOxsJYgQ4jthxxkuokwnS7Wl6FKg
+kMWNdjOzXPTbFmhVB6eFzkBvP8eJ230t93Em68Igp9X16Ia7j3x5AHv9aILTdLlS
+awIDAQABo3oweDBXBgNVHREEUDBOghpzdGVwMTAuYWRtLnMudS10b2t5by5hYy5q
+cIYwaHR0cHM6Ly9zdGVwMTAuYWRtLnMudS10b2t5by5hYy5qcC9zaGliYm9sZXRo
+LXNwMB0GA1UdDgQWBBTxOyvZ12ISgUu08R8GQwJNGG02fzANBgkqhkiG9w0BAQsF
+AAOCAYEAVWH4n8KZomr/0lBuWxKgjW0qWsEZrw6xLLvPaXRXcg/HvDJKp+vv1XK0
+1LSjMYTeTBnBSk1ZcpuhLJw0JPgsnnDQMm7oFxI+yD4r/zFcKQN4VCm9M6UC6CE4
+5XLjnn7/TF+DD7ll1KH8qbalkV8FYhINrOvLQSkuRh3C4gVZ2eIecLvVd2VE2wkn
+hemZPeBTx6OmnchlUmrhzAy99wdqch9msuAyn0UBIrNb0R5YK+4+U2P7mg/BIfHd
+wrYLM6ekl/p9mqGJMGH9btDXwooHG1AmK3axAYoU79tlLKO+xxi/aA2HmVP/4tam
+SEYdTVKKqOsOxppN3FZAQq89DcbMhNFUc7QEXp/+LqPLGrfKrRDvkajXTxwR3wA1
+KtpQIw9SPnvPxq6E0G+W5Pc17Ix27uxprvcR4+VTOUnXgS6Ofgu7oKVh6mkH/IJu
+5V9CjbqK9+NztqVxyIEwaBBABkTzgNI2BTkPtdryLWbOnGXExRyBT8CXHT76Soiu
+qH469jR7</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://step10.adm.s.u-tokyo.ac.jp/Shibboleth.sso/SAML2/POST" index="1" isDefault="true"/>
+    <AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://step10.adm.s.u-tokyo.ac.jp/Shibboleth.sso/SAML2/POST-SimpleSign" index="2"/>
+    <AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://step10.adm.s.u-tokyo.ac.jp/Shibboleth.sso/SAML2/Artifact" index="3"/>
+    <AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post" Location="https://step10.adm.s.u-tokyo.ac.jp/Shibboleth.sso/SAML/POST" index="4"/>
+    <AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01" Location="https://step10.adm.s.u-tokyo.ac.jp/Shibboleth.sso/SAML/Artifact" index="5"/>
+    <AttributeConsumingService index="1" isDefault="true">
+      <ServiceName xml:lang="ja">STEP10聴講申請システム</ServiceName>
+      <ServiceName xml:lang="en">STEP10 course registration system</ServiceName>
+      <ServiceDescription xml:lang="ja">国立大学法人10大学大学院理学研究科等間学生交流プログラムにおける聴講希望申請システム</ServiceDescription>
+      <RequestedAttribute FriendlyName="eduPersonPrincipalName" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" isRequired="true"/>
+    </AttributeConsumingService>
+  </SPSSODescriptor>
+  <Organization>
+    <OrganizationName xml:lang="en">The University of Tokyo</OrganizationName>
+    <OrganizationName xml:lang="ja">東京大学</OrganizationName>
+    <OrganizationDisplayName xml:lang="en">STEP10 course registration system</OrganizationDisplayName>
+    <OrganizationDisplayName xml:lang="ja">STEP10聴講申請システム</OrganizationDisplayName>
+    <OrganizationURL xml:lang="en">https://www.u-tokyo.ac.jp/</OrganizationURL>
+  </Organization>
+  <ContactPerson contactType="technical">
+    <SurName>IT Team, School of Science</SurName>
+    <EmailAddress>mailto:joho.s@gs.mail.u-tokyo.ac.jp</EmailAddress>
+  </ContactPerson>
+</EntityDescriptor>
+</EntitiesDescriptor>

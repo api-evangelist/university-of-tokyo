@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2026-08-19T21:40:32Z</responseDate>
+  <request verb="Identify">https://repository.dl.itc.u-tokyo.ac.jp/oai</request>
+  <Identify>
+    <repositoryName>UTokyo Repository</repositoryName>
+    <adminEmail>digilib@lib.u-tokyo.ac.jp</adminEmail>
+    <baseURL>https://repository.dl.itc.u-tokyo.ac.jp/oai</baseURL>
+    <protocolVersion>2.0</protocolVersion>
+    <earliestDatestamp>2017-03-28T00:00:00Z</earliestDatestamp>
+    <deletedRecord>transient</deletedRecord>
+    <granularity>YYYY-MM-DDThh:mm:ssZ</granularity>
+  </Identify>
+</OAI-PMH>

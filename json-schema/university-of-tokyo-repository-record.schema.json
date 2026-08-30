@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-tokyo/refs/heads/main/json-schema/university-of-tokyo-repository-record.schema.json",
+  "title": "UTokyo Repository Record",
+  "description": "One deposited item as returned by https://repository.dl.itc.u-tokyo.ac.jp/api/records/{id} and as an element of hits.hits on the list endpoint. Derived from live responses on 2026-08-19; the University of Tokyo publishes no schema for this interface.",
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": [
+      "https://repository.dl.itc.u-tokyo.ac.jp/api/records/?size=2",
+      "https://repository.dl.itc.u-tokyo.ac.jp/api/records/2003301"
+    ],
+    "x-operator": "institution"
+  },
+  "type": "object",
+  "required": ["id", "created", "updated", "links", "metadata"],
+  "properties": {
+    "id": { "type": "integer", "description": "WEKO control number.", "examples": [2003301] },
+    "created": { "type": "string", "format": "date-time" },
+    "updated": { "type": "string", "format": "date-time" },
+    "links": {
+      "type": "object",
+      "properties": { "self": { "type": "string", "format": "uri" } },
+      "required": ["self"]
+    },
+    "metadata": {
+      "type": "object",
+      "description": "JPCOAR-shaped item metadata. Flattened top-level fields are the stable view; _item_metadata carries the raw WEKO attribute map with deployment-specific item_<id> keys and Japanese attribute_name labels.",
+      "properties": {
+        "title": { "type": "array", "items": { "type": "string" } },
+        "creator": { "type": "array", "items": { "type": "string" } },
+        "description": { "type": "array", "items": { "type": "string" } },
+        "date": { "type": "array", "items": { "type": "string" } },
+        "language": { "type": "array", "items": { "type": "string" } },
+        "type": { "type": "array", "items": { "type": "string" } },
+        "itemtype": { "type": "string", "examples": ["学位論文 / Thesis or Dissertation"] },
+        "accessRights": { "type": "array", "items": { "type": "string" }, "examples": [["open access"]] },
+        "control_number": { "type": "string" },
+        "publish_date": { "type": "string" },
+        "publish_status": { "type": "string" },
+        "relation_version_is_last": { "type": "boolean" },
+        "path": {
+          "type": "array",
+          "description": "OAI-PMH set memberships.",
+          "items": { "type": "string" }
+        },
+        "identifierRegistration": {
+          "type": "array",
+          "description": "Registered persistent identifier. Only identifierType JaLC (Japan Link Center) under prefix 10.15083 was observed; no DataCite or Crossref registration appeared in any sample.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "identifierType": { "type": "string", "examples": ["JaLC"] },
+              "value": { "type": "string", "examples": ["10.15083/0002003301"] }
+            }
+          }
+        },
+        "degreeName": { "type": "array", "items": { "type": "string" } },
+        "degreeGrantor": { "type": "array", "items": { "type": "string" } },
+        "dateGranted": { "type": "array", "items": { "type": "string" } },
+        "dissertationNumber": { "type": "array", "items": { "type": "string" } },
+        "author_link": { "type": "array", "items": { "type": "string" } },
+        "weko_creator_id": { "type": ["string", "integer"] },
+        "weko_shared_id": { "type": ["string", "integer", "null"] },
+        "_oai": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "sets": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "_comment": { "type": "array", "items": { "type": "string" } },
+        "_creator_info": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "creatorNames": {
+                "type": "object",
+                "properties": {
+                  "creatorName": { "type": "string" },
+                  "creatorNameLang": { "type": "string" },
+                  "idx": { "type": "integer" }
+                }
+              }
+            }
+          }
+        },
+        "_files_info": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "extention": { "type": "string", "description": "Spelled this way in the response." },
+              "url": { "type": "string", "format": "uri" },
+              "date": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "dateType": { "type": "string" },
+                    "dateValue": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_item_metadata": { "type": "object" },
+        "_show_description": { "type": ["boolean", "string", "integer"] },
+        "_show_file": { "type": ["boolean", "string", "integer"] },
+        "_show_reference": { "type": ["boolean", "string", "integer"] }
+      }
+    }
+  }
+}

@@ -1,0 +1,345 @@
+openapi: 3.1.0
+info:
+  title: UTokyo Academic Assets Archives Portal API
+  version: '2026-08-19'
+  summary: >-
+    Search, item-representation and IIIF interfaces of the University of Tokyo Academic Assets
+    Archives Portal (東京大学学術資産等アーカイブズポータル).
+  description: |
+    The Academic Assets Archives Portal is operated by the University of Tokyo Library System on
+    the university's own hosts. It is the one surface in this profile where the university
+    publishes actual API documentation — at https://da.dl.itc.u-tokyo.ac.jp/portal/help/api, in
+    Japanese only. The English help page at /portal/en/help/api carries a single line, "Only
+    available in Japanese", and links across. A profile built from the English surface alone
+    finds nothing here; that is why this entry exists.
+
+    The documented page names two APIs — a search API described as OpenSearch, and a harvesting
+    API described as OAI-PMH (covered separately in
+    openapi/university-of-tokyo-oai-pmh-openapi.yml). Alongside them the portal serves item
+    representations in JSON-LD, CSV and refer/BibIX through a `_format` query parameter, and
+    IIIF Presentation and Image endpoints.
+
+    **The documented search API is not callable from outside.** Every request to
+    `/portal/search`, with and without a browser User-Agent, and from two independent network
+    paths, returned HTTP 403 from Apache/2.4.58. The interface is documented and the portal's own
+    navigation links to it, but automated access is blocked at the edge. That is recorded here as
+    an observed fact about the deployment, not as a claim that the API does not exist.
+
+    Metadata follows DC-NDL (国立国会図書館ダブリンコアメタデータ記述), the National Diet Library
+    Dublin Core profile, which the portal names as its base form. Only material for which reuse
+    permission was obtained is exposed through the APIs.
+  contact:
+    name: University of Tokyo Library System — Archives Portal
+    email: jitsumu_arch@lib.u-tokyo.ac.jp
+    url: https://da.dl.itc.u-tokyo.ac.jp/portal/en/contact
+  license:
+    name: Reuse conditions of the General Library, The University of Tokyo
+    url: https://www.lib.u-tokyo.ac.jp/ja/library/general/reuse
+externalDocs:
+  description: APIについて — the portal's own API documentation (Japanese only)
+  url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+x-operator: institution
+x-operator-evidence: >-
+  da.dl.itc.u-tokyo.ac.jp and iiif.dl.itc.u-tokyo.ac.jp are both under u-tokyo.ac.jp. The IIIF
+  manifests carry attribution "東京大学総合図書館 General Library, The University of Tokyo, JAPAN",
+  a logo on iiif.dl.itc.u-tokyo.ac.jp and a license pointing at lib.u-tokyo.ac.jp. No vendor
+  host, title or contact is present anywhere in the surface.
+x-provenance:
+  generated: '2026-08-19'
+  method: probed
+  source:
+    - https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+    - https://da.dl.itc.u-tokyo.ac.jp/portal/opensearch.xml
+    - https://da.dl.itc.u-tokyo.ac.jp/portal/search?kywd=tokyo
+    - https://da.dl.itc.u-tokyo.ac.jp/portal/assets/fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b?_format=json
+    - https://da.dl.itc.u-tokyo.ac.jp/portal/repo/iiif/fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b/manifest
+    - https://iiif.dl.itc.u-tokyo.ac.jp/iiif/2/seishu%2FA00_5995%2F001%2FA00_5995_001_0001.tif/info.json
+  note: >-
+    Parameters and formats transcribed from the university's own Japanese documentation page,
+    then probed live. Where documentation and observed behaviour disagree, both are recorded.
+servers:
+  - url: https://da.dl.itc.u-tokyo.ac.jp/portal
+    description: Archives Portal. Institution-operated.
+  - url: https://iiif.dl.itc.u-tokyo.ac.jp
+    description: IIIF Image API server. Institution-operated.
+tags:
+  - name: search
+    description: OpenSearch-described search over the portal.
+  - name: items
+    description: Item representations in JSON-LD, CSV and refer/BibIX.
+  - name: iiif
+    description: IIIF Presentation and Image API endpoints.
+paths:
+  /opensearch.xml:
+    get:
+      operationId: getOpenSearchDescription
+      summary: OpenSearch description document
+      description: >-
+        An OpenSearch 1.1 description document declaring the portal's search template
+        `https://da.dl.itc.u-tokyo.ac.jp/portal/search?kywd={searchTerms}`. Publicly reachable
+        (HTTP 200) even though the endpoint it describes is not.
+      tags: [search]
+      responses:
+        '200':
+          description: OpenSearch 1.1 description.
+          content:
+            application/opensearchdescription+xml:
+              schema:
+                type: string
+              examples:
+                description:
+                  summary: Captured live 2026-08-19
+                  externalValue: ../examples/university-of-tokyo-archives-opensearch-description.xml
+  /search:
+    get:
+      operationId: searchAssets
+      summary: Search the portal (documented; blocked to external automated clients)
+      description: >-
+        Documented by the university as the 検索用API. Every probe returned HTTP 403 Forbidden
+        from Apache/2.4.58 — with a Chrome User-Agent, without one, with and without parameters,
+        and from two independent network paths. Parameters below are transcribed from the
+        university's documentation, not confirmed by response.
+      tags: [search]
+      parameters:
+        - name: kywd
+          in: query
+          required: false
+          description: Free-text keyword, per the OpenSearch template.
+          schema:
+            type: string
+        - name: items_per_page
+          in: query
+          required: false
+          description: >-
+            One of 20, 50, 100, 200. Maximum 200, and 200 is also the default when omitted.
+            Out-of-enum values are coerced downward to the nearest allowed band.
+          schema:
+            type: integer
+            enum: [20, 50, 100, 200]
+            default: 200
+        - name: page
+          in: query
+          required: false
+          description: Page number, computed as total hits divided by items_per_page.
+          schema:
+            type: integer
+        - name: collection
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: title
+          in: query
+          required: false
+          description: Restrict to a material title (資料名).
+          schema:
+            type: string
+        - name: author
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: publisher
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: DOI
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sort_by
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - search_api_relevance
+              - field_title
+              - field_title_1
+              - field_year_facet
+              - field_year_facet_1
+        - name: _format
+          in: query
+          required: false
+          description: Response format. HTML when omitted.
+          schema:
+            type: string
+            enum: [csv, json, bix]
+      responses:
+        '200':
+          description: Documented result set. Not observed — see 403.
+        '403':
+          description: >-
+            What this endpoint actually returned on every probe on 2026-08-19. Apache-level
+            block, 289-byte HTML body, content-type text/html; charset=iso-8859-1.
+          content:
+            text/html:
+              schema:
+                type: string
+  /assets/{assetId}:
+    get:
+      operationId: getAsset
+      summary: Retrieve one archival item
+      description: >-
+        Returns the item detail page, or a machine-readable representation when `_format` is
+        given. All three machine formats returned HTTP 200 on probe. The JSON form is JSON-LD
+        (`application/ld+json`) with a DC-NDL / Dublin Core / FOAF context.
+      tags: [items]
+      parameters:
+        - name: assetId
+          in: path
+          required: true
+          description: Item UUID. Also the tail of the OAI-PMH identifier for this item.
+          schema:
+            type: string
+            format: uuid
+          example: fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b
+        - name: _format
+          in: query
+          required: false
+          description: >-
+            `json` returns JSON-LD (3,131 bytes on probe), `csv` returns text/csv (5,482 bytes),
+            `bix` returns refer/BibIX as text/plain (601 bytes). Omitted returns HTML.
+          schema:
+            type: string
+            enum: [json, csv, bix]
+      responses:
+        '200':
+          description: The item.
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                description: >-
+                  DC-NDL descriptive metadata as JSON-LD. Context binds dcndl, dcterms, foaf,
+                  rdfs and dc.
+              examples:
+                item:
+                  summary: Captured live 2026-08-19
+                  externalValue: ../examples/university-of-tokyo-archives-item-jsonld.json
+            text/csv:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: string
+                description: refer/BibIX format.
+        '404':
+          description: Unknown item.
+  /repo/iiif/{assetId}/manifest:
+    get:
+      operationId: getIiifManifest
+      summary: IIIF Presentation manifest for an item
+      description: >-
+        IIIF Presentation API 2.1 manifest (`@context`
+        http://iiif.io/api/presentation/2/context.json, `@type` sc:Manifest). Carries label,
+        attribution, license, logo, viewingDirection, `related` to the item page, `seeAlso` to
+        the item JSON-LD, `within` to the parent collection, and a sequence of canvases whose
+        images resolve against the IIIF Image API server.
+      tags: [iiif]
+      parameters:
+        - name: assetId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b
+      responses:
+        '200':
+          description: IIIF Presentation 2.1 manifest.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                manifest:
+                  summary: 百鬼夜行図, captured live 2026-08-19
+                  externalValue: ../examples/university-of-tokyo-iiif-presentation-manifest.json
+  /iiif/2/{identifier}/info.json:
+    servers:
+      - url: https://iiif.dl.itc.u-tokyo.ac.jp
+        description: IIIF Image API server. Institution-operated.
+    get:
+      operationId: getIiifImageInfo
+      summary: IIIF Image API image information
+      description: >-
+        IIIF Image API 2.0 information request. The server declares
+        `http://iiif.io/api/image/2/level2.json` compliance, formats tif/jpg/gif/png,
+        qualities bitonal/default/gray/color, 512×512 tiles with scale factors to 128, and
+        maxArea 151,301,008. Identifiers are URL-encoded file paths.
+      tags: [iiif]
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          description: URL-encoded image identifier.
+          schema:
+            type: string
+          example: seishu%2FA00_5995%2F001%2FA00_5995_001_0001.tif
+      responses:
+        '200':
+          description: IIIF Image API 2.0 image information document.
+          content:
+            application/ld+json:
+              schema:
+                type: object
+              examples:
+                info:
+                  summary: Captured live 2026-08-19
+                  externalValue: ../examples/university-of-tokyo-iiif-image-info.json
+  /iiif/2/{identifier}/{region}/{size}/{rotation}/{quality}.{format}:
+    servers:
+      - url: https://iiif.dl.itc.u-tokyo.ac.jp
+        description: IIIF Image API server. Institution-operated.
+    get:
+      operationId: getIiifImage
+      summary: IIIF Image API image request
+      description: IIIF Image API 2.0 level 2 image delivery.
+      tags: [iiif]
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: region
+          in: path
+          required: true
+          schema:
+            type: string
+          example: full
+        - name: size
+          in: path
+          required: true
+          schema:
+            type: string
+          example: '!220,220'
+        - name: rotation
+          in: path
+          required: true
+          schema:
+            type: string
+          example: '0'
+        - name: quality
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [bitonal, default, gray, color]
+        - name: format
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [tif, jpg, gif, png]
+      responses:
+        '200':
+          description: The derivative image.
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary

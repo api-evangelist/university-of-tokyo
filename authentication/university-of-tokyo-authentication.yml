@@ -1,0 +1,104 @@
+generated: '2026-08-19'
+method: probed
+source:
+  - https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
+  - https://repository.dl.itc.u-tokyo.ac.jp/api/records/
+  - https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  - https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml
+  - https://utol.ecc.u-tokyo.ac.jp/
+  - https://wisteria-www.cc.u-tokyo.ac.jp/cgi-bin/hpcportal.en/index.cgi
+summary:
+  types: [none, saml2]
+  api_key_in: []
+  oauth2_flows: []
+  note: >-
+    The University of Tokyo's public machine-readable surfaces require no credential at all —
+    there is no API key, no developer registration, no token endpoint and no OAuth server on any
+    institution host. That is not a gap: OAI-PMH, IIIF and the repository records interface are
+    open-access reading surfaces by design and no key exists to issue.
+
+    The university's actual authentication engineering is federated identity, and it is
+    substantial. Two Shibboleth SAML 2.0 Identity Providers registered in GakuNin, the Japanese
+    academic access federation operated by the National Institute of Informatics, gate the
+    university's internal and licensed services. That is the institution-operated authentication
+    surface, and it is the one an integrator will actually meet — it just is not reachable as a
+    public API.
+schemes:
+  - name: none
+    type: none
+    applies_to:
+      - openapi/university-of-tokyo-oai-pmh-openapi.yml
+      - openapi/university-of-tokyo-repository-records-openapi.yml
+      - openapi/university-of-tokyo-archives-portal-openapi.yml
+    evidence: >-
+      All OAI-PMH verbs, all /api/records/ requests, all IIIF manifest and info.json requests and
+      all item _format requests returned HTTP 200 with no Authorization header and no cookie. The
+      library documentation states no API key is required.
+  - name: GakuNin SAML 2.0 federated single sign-on
+    type: saml2
+    operator: institution
+    federation: GakuNin (学術認証フェデレーション), registrationAuthority https://www.gakunin.jp
+    federation_operator: National Institute of Informatics (NII)
+    entities:
+      - entity_id: https://gidp.adm.u-tokyo.ac.jp/idp/shibboleth
+        role: IdentityProvider
+        display_name_en: The University of Tokyo
+        display_name_ja: 東京大学
+        scope: u-tokyo.ac.jp
+        sso_endpoints:
+          - https://gidp.adm.u-tokyo.ac.jp/idp/profile/SAML2/Redirect/SSO
+          - https://gidp.adm.u-tokyo.ac.jp/idp/profile/SAML2/POST/SSO
+          - https://gidp.adm.u-tokyo.ac.jp/idp/profile/Shibboleth/SSO
+        contact: systemshien.adm@gs.mail.u-tokyo.ac.jp
+      - entity_id: https://shibbi.pki.itc.u-tokyo.ac.jp/idp/shibboleth
+        role: IdentityProvider
+        display_name_en: KAGRA
+        organization_en: The University of Tokyo
+        sso_endpoints:
+          - https://shibbi.pki.itc.u-tokyo.ac.jp/idp/profile/SAML2/Redirect/SSO
+          - https://shibbi.pki.itc.u-tokyo.ac.jp/idp/profile/SAML2/POST/SSO
+          - https://shibbi.pki.itc.u-tokyo.ac.jp/idp/profile/Shibboleth/SSO
+        contact: kagra-idp-contact@icrr.u-tokyo.ac.jp
+        note: >-
+          Serves KAGRA, the gravitational-wave observatory operated by the Institute for Cosmic
+          Ray Research. Institution-operated, research-collaboration scoped.
+      - entity_id: https://step10.adm.s.u-tokyo.ac.jp/shibboleth-sp
+        role: ServiceProvider
+        display_name_en: STEP10 course registration system
+        display_name_ja: STEP10聴講申請システム
+        contact: joho.s@gs.mail.u-tokyo.ac.jp
+        note: >-
+          A course-registration service consuming federated identity — the closest thing to a
+          registrar surface the university exposes in a machine-readable form, and it is exposed
+          as an SP entity, not as an API.
+    metadata_source: https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml
+    local_copy: examples/university-of-tokyo-gakunin-saml-metadata.xml
+    evidence: >-
+      650 EntityDescriptors in the GakuNin aggregate; exactly 3 carry an entityID under
+      u-tokyo.ac.jp. All three declare mdrpi:registrationAuthority https://www.gakunin.jp and
+      Organization Name "The University of Tokyo" / 東京大学.
+gated_surfaces:
+  - name: UTOL — University of Tokyo Learning Management System
+    url: https://utol.ecc.u-tokyo.ac.jp/
+    status: 200 (redirects to /login)
+    operator: institution
+    note: >-
+      The university's own LMS, self-hosted on u-tokyo.ac.jp (the former ITC-LMS hostname
+      itc-lms.ecc.u-tokyo.ac.jp resolves to the same login). Institutional credentials only. No
+      public LTI configuration, no public API, no developer documentation.
+  - name: HPC Portal (Wisteria / Miyabi / Information Technology Center)
+    url: https://wisteria-www.cc.u-tokyo.ac.jp/cgi-bin/hpcportal.en/index.cgi
+    status: 200
+    operator: institution
+    note: >-
+      Allocation and job portal for the Information Technology Center's supercomputers. Reachable
+      and English-language, but every function behind an account. No service-catalog API is
+      published.
+no_vendor_tenancy_found: true
+tenancy_evidence: >-
+  Probed for the vendor tenancies that dominate this cohort. u-tokyo.figshare.com and
+  utokyo.figshare.com return HTTP 202 with a zero-byte body (Figshare's unknown-tenant
+  response). utokyo.pure.elsevier.com 301s to utokyo.elsevierpure.com, which does not resolve.
+  utokyo.instructure.com returns HTTP 404. utokyo.dataverse.harvard.edu and dataverse.u-tokyo.ac.jp
+  do not resolve. No Figshare, Pure, Symplectic, Dataverse or Canvas tenancy could be
+  substantiated for this institution.
