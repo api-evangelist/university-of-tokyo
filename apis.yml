@@ -176,6 +176,8 @@ apis:
   humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
   baseURL: https://da.dl.itc.u-tokyo.ac.jp/portal
   tags:
+  - IIIF
+  tags_raw:
   - iiif
   properties:
   - type: OpenAPI
@@ -224,6 +226,8 @@ apis:
   humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
   baseURL: https://da.dl.itc.u-tokyo.ac.jp/portal
   tags:
+  - Item
+  tags_raw:
   - items
   properties:
   - type: OpenAPI
@@ -272,6 +276,8 @@ apis:
   humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
   baseURL: https://da.dl.itc.u-tokyo.ac.jp/portal
   tags:
+  - OAI-PMH
+  tags_raw:
   - oai-pmh
   properties:
   - type: OpenAPI
@@ -320,6 +326,8 @@ apis:
   humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
   baseURL: https://da.dl.itc.u-tokyo.ac.jp/portal
   tags:
+  - Records
+  tags_raw:
   - records
   properties:
   - type: OpenAPI
@@ -368,6 +376,8 @@ apis:
   humanURL: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
   baseURL: https://da.dl.itc.u-tokyo.ac.jp/portal
   tags:
+  - Search
+  tags_raw:
   - search
   properties:
   - type: OpenAPI
