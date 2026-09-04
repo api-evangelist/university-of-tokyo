@@ -1,17 +1,17 @@
 ---
 kin_checks:
   slug: university-of-tokyo
-  schema_version: 0.17.2
-  scored_at: '2026-09-01'
-  run_ts: 2026-09-01T063623
+  schema_version: 0.18.2
+  scored_at: '2026-09-04'
+  run_ts: 2026-09-04T062714
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.17.2.yml; counts below let you verify that.
+    in rubric/scoring-0.18.2.yml; counts below let you verify that.
   counts:
-    total: 130
-    earned: 30
+    total: 132
+    earned: 31
     partial: 23
-    missed: 58
-    na: 19
+    missed: 54
+    na: 24
   checks:
   - id: well_known_published
     status: missed
@@ -99,14 +99,6 @@ kin_checks:
     status: missed
   - id: reg_named_standard_conformance
     status: missed
-  - id: os_security_policy
-    status: missed
-  - id: os_contribution_guide
-    status: missed
-  - id: os_releases
-    status: missed
-  - id: os_code_of_conduct
-    status: missed
   - id: agentic_access
     status: missed
   - id: reversibility_documented
@@ -137,60 +129,60 @@ kin_checks:
     status: missed
   - id: contract_present
     status: partial
-    earned: 15.0
+    earned: 17.0
   - id: openapi_3_1
     status: partial
-    earned: 3.75
+    earned: 4.25
     detail: 5 of 5 openapi documents pass
   - id: info_complete
     status: partial
-    earned: 3.0
+    earned: 3.4
     detail: 5 of 5 openapi documents pass
   - id: servers_defined
     status: partial
-    earned: 2.25
+    earned: 2.55
     detail: 5 of 5 openapi documents pass
   - id: servers_resolvable
     status: partial
-    earned: 3.75
+    earned: 4.25
   - id: operations_summary_coverage
     status: partial
-    earned: 4.5
+    earned: 5.1
     detail: 5 of 5 openapi documents pass
   - id: operations_description_coverage
     status: partial
-    earned: 3.6
+    earned: 4.08
     detail: 4 of 5 openapi documents pass
   - id: operations_tagged
     status: partial
-    earned: 3.0
+    earned: 3.4
     detail: 5 of 5 openapi documents pass
   - id: operations_operation_ids
     status: partial
-    earned: 3.0
+    earned: 3.4
     detail: 5 of 5 openapi documents pass
   - id: response_coverage
     status: partial
-    earned: 3.75
+    earned: 4.25
     detail: 5 of 5 openapi documents pass
   - id: error_responses_documented
     status: partial
-    earned: 1.8
+    earned: 2.04
     detail: 3 of 5 openapi documents pass
   - id: examples_present
     status: partial
-    earned: 2.7
+    earned: 3.06
   - id: oauth_flows_current
     status: partial
-    earned: 3.0
+    earned: 3.4
     detail: 5 of 5 openapi documents pass
   - id: credentials_not_in_query
     status: partial
-    earned: 2.25
+    earned: 2.55
     detail: 5 of 5 openapi documents pass
   - id: oauth_scopes_enumerated
     status: partial
-    earned: 3.0
+    earned: 3.4
     detail: 5 of 5 openapi documents pass
   - id: vocabulary_published
     status: partial
