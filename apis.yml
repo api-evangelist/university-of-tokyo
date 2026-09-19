@@ -158,6 +158,13 @@ apis:
   - Identity Federation
   - SAML
   - Shibboleth
+  - SSO
+  - GakuNin
+  - Research Infrastructure
+  tags_raw:
+  - Identity Federation
+  - SAML
+  - Shibboleth
   - Single Sign-On
   - GakuNin
   - Research Infrastructure
