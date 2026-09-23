@@ -3,44 +3,142 @@ name: University of Tokyo
 description: University of Tokyo public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/university-of-tokyo/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 reviews:
-  - date: '2026-06-03'
-    rating: 2
-    summary: >-
-      The University of Tokyo has no unified, branded developer portal or
-      authenticated REST API program. Its confirmed public, machine-readable
-      surface is library/digital-humanities oriented: the utda Digital Archive
-      Portal exposes IIIF image/presentation APIs plus downloadable IIIF
-      Collections and JSON-LD/RDF/CSV/TEI datasets (API docs Japanese-only),
-      and the UTokyo Repository (WEKO) serves a live OAI-PMH 2.0 endpoint that
-      was verified to return a valid Identify response (repositoryName
-      "UTokyo Repository"). The official GitHub at github.com/UTokyo exists but
-      has no public repositories; the active code presence is github.com/utda.
-      No course/SIS/timetable APIs were found public. All listed URLs were
-      probed live; nothing here is fabricated.
-    endpoints:
-      - url: https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
-        status: 200
-        note: Live OAI-PMH 2.0 Identify; WEKO, repositoryName "UTokyo Repository".
-      - url: https://da.dl.itc.u-tokyo.ac.jp/portal/en/help/api
-        status: 200
-        note: Digital Archive IIIF API help page; full API docs Japanese-only.
-      - url: https://repository.dl.itc.u-tokyo.ac.jp/?lang=english
-        status: 200
-        note: UTokyo Repository institutional repository home.
-      - url: https://github.com/utda
-        status: 200
-        note: Active UTokyo Digital Archives org; dataset and IIIF tooling repos.
-      - url: https://github.com/UTokyo
-        status: 200
-        note: Org exists but has no public repositories.
-      - url: https://www.lib.u-tokyo.ac.jp/en/
-        status: 200
-        note: University of Tokyo Library System (English).
-      - url: https://www.u-tokyo.ac.jp/en/
-        status: 200
-        note: Official university website (English).
-      - url: https://www.linkedin.com/school/university-of-tokyo/
-        status: 999
-        note: LinkedIn school page; 999 is LinkedIn bot block, URL is standard.
+- date: '2026-08-19'
+  rating: 3
+  summary: 'Re-profiled under the API Evangelist university pipeline, which settles operator attribution
+    before saving any artifact. Outcome for this institution: every surface is x-operator: institution
+    — no vendor tenancy could be substantiated at all (u-tokyo.figshare.com and utokyo.figshare.com return
+    HTTP 202 with a zero-byte body, utokyo.pure.elsevier.com 301s to a hostname that does not resolve,
+    utokyo.instructure.com returns 404). UTokyo self-hosts WEKO3 on its own domain rather than buying
+    a hosted repository, so the Figshare misattribution that defines this cohort does not apply here.
+
+
+    The June 2026 profile recorded two surfaces. This pass found five, and the reason the earlier pass
+    missed three of them is instructive: the English API help page at /portal/en/help/api returns 200
+    with one sentence — "Only available in Japanese" — while the Japanese page at /portal/help/api carries
+    the complete verb, parameter, format and resumptionToken paging tables. New this pass: a second OAI-PMH
+    endpoint on the Archives Portal (1,957 sets, earliest datestamp 2013-01-01, persistent deletion records);
+    a live undocumented JSON records API at /api/records/ carrying 69,549 records; item representations
+    in JSON-LD, CSV and refer/BibIX; IIIF Presentation 2.1 manifests and a IIIF Image 2.0 level2 service
+    verified against a real manifest and info.json; and three Shibboleth SAML 2.0 entities registered
+    in GakuNin, which is the institution''s largest genuinely-owned machine-readable artifact and had
+    never been catalogued.
+
+
+    Two edge behaviours were recorded because they change how the surfaces read. repository.dl.itc.u-tokyo.ac.jp
+    returns HTTP 406 to a desktop-browser User-Agent and 200 to a plain client — inverted from the usual
+    bot challenge, so the standard retry heuristic makes a fully live host look dead. And the documented
+    search API at /portal/search returns HTTP 403 to every external automated client tested, from two
+    independent network paths; it is blocked, not absent, and its parameters are transcribed from the
+    university''s own documentation rather than confirmed by response.
+
+
+    The institution still publishes no OpenAPI, no developer program, no API key, no OAuth server, no
+    status page and no course or student-information API. Every OpenAPI in this repository was derived
+    by API Evangelist from live probes and says so in x-provenance. Nothing was fabricated.'
+  endpoints:
+  - url: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+    status: 200
+    note: Japanese-only API documentation — the source of the search and OAI-PMH parameter tables.
+  - url: https://da.dl.itc.u-tokyo.ac.jp/portal/en/help/api
+    status: 200
+    note: 'English help page. 13,997 bytes of navigation and one sentence: "Only available in Japanese".'
+  - url: https://da.dl.itc.u-tokyo.ac.jp/portal/oai?verb=Identify
+    status: 200
+    note: Second OAI-PMH endpoint. repositoryName "UTokyo Academic Archives Portal", deletedRecord persistent,
+      earliest 2013-01-01.
+  - url: https://da.dl.itc.u-tokyo.ac.jp/portal/oai?verb=ListSets
+    status: 200
+    note: 320,741 bytes describing 1,957 sets.
+  - url: https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
+    status: 200
+    note: 200 with a plain client; 406 with a browser User-Agent. WEKO3, adminEmail digilib@lib.u-tokyo.ac.jp.
+  - url: https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=ListMetadataFormats
+    status: 200
+    note: 'Seven prefixes: jpcoar_2.0, jpcoar, jpcoar_1.0, jpcoar_v1, oai_dc, ddi, lom.'
+  - url: https://repository.dl.itc.u-tokyo.ac.jp/api/records/
+    status: 200
+    note: 80,517 bytes JSON. hits.total 69,549. Undocumented; robots.txt disallows /api/.
+  - url: https://da.dl.itc.u-tokyo.ac.jp/portal/repo/iiif/fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b/manifest
+    status: 200
+    note: IIIF Presentation 2 manifest, attribution "General Library, The University of Tokyo, JAPAN".
+  - url: https://iiif.dl.itc.u-tokyo.ac.jp/iiif/2/seishu%2FA00_5995%2F001%2FA00_5995_001_0001.tif/info.json
+    status: 200
+    note: IIIF Image API 2.0, profile level2, 14204x10652 source, 512px tiles.
+  - url: https://da.dl.itc.u-tokyo.ac.jp/portal/assets/fbd0479b-dbb4-4eaa-95b8-f27e1c423e4b?_format=json
+    status: 200
+    note: application/ld+json, DC-NDL vocabulary. CSV and refer/BibIX also 200.
+  - url: https://da.dl.itc.u-tokyo.ac.jp/portal/opensearch.xml
+    status: 200
+    note: Valid OpenSearch 1.1 description of an endpoint that is 403.
+  - url: https://da.dl.itc.u-tokyo.ac.jp/portal/search?kywd=tokyo
+    status: 403
+    note: Apache/2.4.58, 289 bytes. Same with and without a browser UA, and via an independent fetch service.
+  - url: https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml
+    status: 200
+    note: 5,649,623 bytes, 650 entities; exactly 3 under u-tokyo.ac.jp, all registrationAuthority https://www.gakunin.jp.
+  - url: https://utol.ecc.u-tokyo.ac.jp/
+    status: 200
+    note: UTOL, the university's own LMS. Redirects to /login. No public LTI configuration or API.
+  - url: https://wisteria-www.cc.u-tokyo.ac.jp/cgi-bin/hpcportal.en/index.cgi
+    status: 200
+    note: HPC allocation portal. Reachable, every function credentialed, no service-catalog API.
+  - url: https://u-tokyo.figshare.com/
+    status: 202
+    note: Zero-byte body — Figshare unknown-tenant response. No Figshare tenancy.
+  - url: https://utokyo.pure.elsevier.com/
+    status: 301
+    note: Redirects to utokyo.elsevierpure.com, which does not resolve. No Pure tenancy.
+  - url: https://utokyo.instructure.com/
+    status: 404
+    note: No Canvas tenancy.
+  - url: https://www.u-tokyo.ac.jp/llms.txt
+    status: 404
+    note: No llms.txt.
+  - url: https://www.u-tokyo.ac.jp/.well-known/security.txt
+    status: 404
+    note: No RFC 9116 security.txt.
+  - url: https://catalog.he.u-tokyo.ac.jp/
+    status: 200
+    note: Online course catalogue. HTML only; no API, no OpenSearch description, /api 404.
+  - url: https://opac.dl.itc.u-tokyo.ac.jp/
+    status: 200
+    note: Library OPAC on an institution host. NEC ILS. OpenURL resolver returns 202 with an empty body
+      — not usable as a machine surface.
+- date: '2026-06-03'
+  rating: 2
+  summary: 'The University of Tokyo has no unified, branded developer portal or authenticated REST API
+    program. Its confirmed public, machine-readable surface is library/digital-humanities oriented: the
+    utda Digital Archive Portal exposes IIIF image/presentation APIs plus downloadable IIIF Collections
+    and JSON-LD/RDF/CSV/TEI datasets (API docs Japanese-only), and the UTokyo Repository (WEKO) serves
+    a live OAI-PMH 2.0 endpoint that was verified to return a valid Identify response (repositoryName
+    "UTokyo Repository"). The official GitHub at github.com/UTokyo exists but has no public repositories;
+    the active code presence is github.com/utda. No course/SIS/timetable APIs were found public. All listed
+    URLs were probed live; nothing here is fabricated.'
+  endpoints:
+  - url: https://repository.dl.itc.u-tokyo.ac.jp/oai?verb=Identify
+    status: 200
+    note: Live OAI-PMH 2.0 Identify; WEKO, repositoryName "UTokyo Repository".
+  - url: https://da.dl.itc.u-tokyo.ac.jp/portal/en/help/api
+    status: 200
+    note: Digital Archive IIIF API help page; full API docs Japanese-only.
+  - url: https://repository.dl.itc.u-tokyo.ac.jp/?lang=english
+    status: 200
+    note: UTokyo Repository institutional repository home.
+  - url: https://github.com/utda
+    status: 200
+    note: Active UTokyo Digital Archives org; dataset and IIIF tooling repos.
+  - url: https://github.com/UTokyo
+    status: 200
+    note: Org exists but has no public repositories.
+  - url: https://www.lib.u-tokyo.ac.jp/en/
+    status: 200
+    note: University of Tokyo Library System (English).
+  - url: https://www.u-tokyo.ac.jp/en/
+    status: 200
+    note: Official university website (English).
+  - url: https://www.linkedin.com/school/university-of-tokyo/
+    status: 999
+    note: LinkedIn school page; 999 is LinkedIn bot block, URL is standard.

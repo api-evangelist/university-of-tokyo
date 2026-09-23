@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2026-08-19T21:40:33Z</responseDate>
+  <request verb="ListMetadataFormats">https://repository.dl.itc.u-tokyo.ac.jp/oai</request>
+  <ListMetadataFormats>
+    <metadataFormat>
+      <metadataPrefix>jpcoar_1.0</metadataPrefix>
+      <schema>https://irdb.nii.ac.jp/schema/jpcoar/1.0/jpcoar_scm.xsd</schema>
+      <metadataNamespace>https://irdb.nii.ac.jp/schema/jpcoar/1.0/</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>jpcoar</metadataPrefix>
+      <schema>https://github.com/JPCOAR/schema/blob/master/2.0/jpcoar_scm.xsd</schema>
+      <metadataNamespace>https://github.com/JPCOAR/schema/blob/master/2.0/</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>jpcoar_2.0</metadataPrefix>
+      <schema>https://irdb.nii.ac.jp/schema/jpcoar/2.0/jpcoar_scm.xsd</schema>
+      <metadataNamespace>https://irdb.nii.ac.jp/schema/jpcoar/2.0/</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>oai_dc</metadataPrefix>
+      <schema>http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd</schema>
+      <metadataNamespace>http://www.w3.org/2001/XMLSchema</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>ddi</metadataPrefix>
+      <schema>https://ddialliance.org/Specification/DDI-Codebook/2.5/XMLSchema/codebook.xsd</schema>
+      <metadataNamespace>ddi:codebook:2_5</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>jpcoar_v1</metadataPrefix>
+      <schema>https://github.com/JPCOAR/schema/blob/master/1.0/jpcoar_scm.xsd</schema>
+      <metadataNamespace>https://github.com/JPCOAR/schema/blob/master/1.0/</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>lom</metadataPrefix>
+      <schema>http://www.lido-schema.org http://www.lido-schema.org/schema/v1.0/lido-v1.0.xsd</schema>
+      <metadataNamespace>http://ltsc.ieee.org/xsd/LOM</metadataNamespace>
+    </metadataFormat>
+  </ListMetadataFormats>
+</OAI-PMH>

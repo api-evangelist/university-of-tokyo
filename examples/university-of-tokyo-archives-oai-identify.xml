@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2026-08-19T21:40:33Z</responseDate>
+  <request verb="Identify">http/da.dl.itc.u-tokyo.ac.jp/portal/oai</request>
+  <Identify>
+    <repositoryName>UTokyo Academic Archives Portal</repositoryName>
+    <baseURL>https://da.dl.itc.u-tokyo.ac.jp/portal/</baseURL>
+    <protocolVersion>2.0</protocolVersion>
+    <adminEmail>jitsumu_arch@lib.u-tokyo.ac.jp</adminEmail>
+    <earliestDatestamp>2013-01-01T12:00:00Z</earliestDatestamp>
+    <deletedRecord>persistent</deletedRecord>
+    <granularity>YYYY-MM-DDThh:mm:ssZ</granularity>
+  </Identify>
+</OAI-PMH>

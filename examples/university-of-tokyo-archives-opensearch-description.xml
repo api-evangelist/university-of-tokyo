@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+<ShortName>東京大学デジタルアーカイブポータル</ShortName>
+<Description>東京大学デジタルアーカイブポータルの検索</Description>
+<Url type="text/html" template="https://da.dl.itc.u-tokyo.ac.jp/portal/search?kywd={searchTerms}" method="GET"/>
+<AdultContent>false</AdultContent>
+<OutputEncoding>UTF-8</OutputEncoding>
+<InputEncoding>UTF-8</InputEncoding>
+<moz:SearchForm>https://da.dl.itc.u-tokyo.ac.jp/portal/search</moz:SearchForm>
+</OpenSearchDescription>

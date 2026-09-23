@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2026-08-19T21:40:34Z</responseDate>
+  <request verb="ListMetadataFormats">http/da.dl.itc.u-tokyo.ac.jp/portal/oai</request>
+  <ListMetadataFormats>
+    <metadataFormat>
+      <metadataPrefix>junii2</metadataPrefix>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>oai_dc</metadataPrefix>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>dcndl_simple</metadataPrefix>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>jpcoar</metadataPrefix>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>dcndl_js</metadataPrefix>
+    </metadataFormat>
+  </ListMetadataFormats>
+</OAI-PMH>

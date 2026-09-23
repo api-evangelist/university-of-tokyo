@@ -1,0 +1,32 @@
+{
+  "provider": "university-of-tokyo",
+  "sources": [
+    "_original/university-of-tokyo-archives-portal-openapi.yml",
+    "_original/university-of-tokyo-oai-pmh-openapi.yml",
+    "_original/university-of-tokyo-repository-records-openapi.yml"
+  ],
+  "outputs": [
+    "university-of-tokyo-iiif-api-openapi.yml",
+    "university-of-tokyo-items-api-openapi.yml",
+    "university-of-tokyo-search-api-openapi.yml",
+    "university-of-tokyo-oai-pmh-api-openapi.yml",
+    "university-of-tokyo-records-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "university-of-tokyo-archives-portal-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "university-of-tokyo-oai-pmh-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "university-of-tokyo-repository-records-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "university-of-tokyo-iiif-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-tokyo-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-tokyo-oai-pmh-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-tokyo-records-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-tokyo-search-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

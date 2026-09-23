@@ -5,46 +5,7 @@ info:
   summary: Search, item-representation and IIIF interfaces of the University of Tokyo Academic Assets Archives Portal (東京大学学術資産等アーカイブズポータル).
   description: 'The Academic Assets Archives Portal is operated by the University of Tokyo Library System on
 
-    the university''s own hosts. It is the one surface in this profile where the university
-
-    publishes actual API documentation — at https://da.dl.itc.u-tokyo.ac.jp/portal/help/api, in
-
-    Japanese only. The English help page at /portal/en/help/api carries a single line, "Only
-
-    available in Japanese", and links across. A profile built from the English surface alone
-
-    finds nothing here; that is why this entry exists.
-
-
-    The documented page names two APIs — a search API described as OpenSearch, and a harvesting
-
-    API described as OAI-PMH (covered separately in
-
-    openapi/university-of-tokyo-oai-pmh-openapi.yml). Alongside them the portal serves item
-
-    representations in JSON-LD, CSV and refer/BibIX through a `_format` query parameter, and
-
-    IIIF Presentation and Image endpoints.
-
-
-    **The documented search API is not callable from outside.** Every request to
-
-    `/portal/search`, with and without a browser User-Agent, and from two independent network
-
-    paths, returned HTTP 403 from Apache/2.4.58. The interface is documented and the portal''s own
-
-    navigation links to it, but automated access is blocked at the edge. That is recorded here as
-
-    an observed fact about the deployment, not as a claim that the API does not exist.
-
-
-    Metadata follows DC-NDL (国立国会図書館ダブリンコアメタデータ記述), the National Diet Library
-
-    Dublin Core profile, which the portal names as its base form. Only material for which reuse
-
-    permission was obtained is exposed through the APIs.
-
-    '
+    the university''s own hosts.'
   contact:
     name: University of Tokyo Library System — Archives Portal
     email: jitsumu_arch@lib.u-tokyo.ac.jp
@@ -58,7 +19,7 @@ servers:
 - url: https://iiif.dl.itc.u-tokyo.ac.jp
   description: IIIF Image API server. Institution-operated.
 tags:
-- name: iiif
+- name: IIIF
   description: IIIF Presentation and Image API endpoints.
 paths:
   /repo/iiif/{assetId}/manifest:
@@ -67,7 +28,7 @@ paths:
       summary: IIIF Presentation manifest for an item
       description: IIIF Presentation API 2.1 manifest (`@context` http://iiif.io/api/presentation/2/context.json, `@type` sc:Manifest). Carries label, attribution, license, logo, viewingDirection, `related` to the item page, `seeAlso` to the item JSON-LD, `within` to the parent collection, and a sequence of canvases whose images resolve against the IIIF Image API server.
       tags:
-      - iiif
+      - IIIF
       parameters:
       - name: assetId
         in: path
@@ -96,7 +57,7 @@ paths:
       summary: IIIF Image API image information
       description: IIIF Image API 2.0 information request. The server declares `http://iiif.io/api/image/2/level2.json` compliance, formats tif/jpg/gif/png, qualities bitonal/default/gray/color, 512×512 tiles with scale factors to 128, and maxArea 151,301,008. Identifiers are URL-encoded file paths.
       tags:
-      - iiif
+      - IIIF
       parameters:
       - name: identifier
         in: path
@@ -125,7 +86,7 @@ paths:
       summary: IIIF Image API image request
       description: IIIF Image API 2.0 level 2 image delivery.
       tags:
-      - iiif
+      - IIIF
       parameters:
       - name: identifier
         in: path

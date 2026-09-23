@@ -4,7 +4,7 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: University of Tokyo
 providerId: university-of-tokyo
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 reconciled: false
 tags:
 - Education
@@ -12,24 +12,65 @@ tags:
 - University
 - Rate Limiting
 description: >-
-  University of Tokyo does not publish a unified public rate-limit table across its APIs. Open
-  metadata and harvesting endpoints (OAI-PMH, IIIF, library) may throttle large-scale
-  or automated harvesting; clients should harvest politely, honor Retry-After, and
-  contact the relevant service for bulk access.
-notes: Confirm per-service limits with each API's documentation; harvest responsibly.
+  The University of Tokyo publishes no rate limit for any of its interfaces, and no 429 was
+  observed on any probe. What it does enforce instead is edge access control, and it is
+  unusual enough to be the operative constraint: repository.dl.itc.u-tokyo.ac.jp returns
+  HTTP 406 to a desktop-browser User-Agent and 200 to a plain client (inverted from the usual
+  bot challenge), while da.dl.itc.u-tokyo.ac.jp returns HTTP 403 on /portal/search to every
+  external automated client regardless of User-Agent. Paging limits are protocol-level:
+  the Archives Portal caps OAI-PMH ListRecords at 100 records per resumptionToken page, and
+  its documented search API caps items_per_page at 200.
+notes: >-
+  Re-verified 2026-08-19. No Retry-After, X-RateLimit-* or quota header was returned by any
+  endpoint. Harvest at low rate and identify yourself with a real contact string; the
+  repository's robots.txt disallows /api/, /oai and /search.
 sources:
 - https://raw.githubusercontent.com/api-evangelist/university-of-tokyo/refs/heads/main/apis.yml
+- https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+- https://repository.dl.itc.u-tokyo.ac.jp/robots.txt
+- https://repository.dl.itc.u-tokyo.ac.jp/api/records/
+method: probed
+generated: '2026-08-19'
 responseCodes:
-  throttled: 429
+  throttled: null
+  throttled_note: >-
+    No 429 was observed on any endpoint. The status codes that actually gate access are 406
+    (repository, browser User-Agent) and 403 (Archives Portal search, all automated clients).
 limits:
-- name: Default
+- name: OAI-PMH ListRecords page size
+  scope: protocol
+  metric: records-per-page
+  limit: 100
+  source: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  notes: Archives Portal cap, documented by the university. Continue with resumptionToken.
+- name: Archives Portal search page size
+  scope: protocol
+  metric: items-per-page
+  limit: 200
+  source: https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+  notes: >-
+    Documented maximum and also the default when items_per_page is omitted. Endpoint returns
+    403 to external automated clients, so this is documented rather than observed.
+- name: Repository records default page size
+  scope: client
+  metric: records-per-page
+  limit: 10
+  notes: Observed default on /api/records/. Overridable with ?size=. No documented ceiling.
+- name: Global request rate
   scope: client
   metric: requests-per-minute
-  limit: see service documentation
-  notes: No published global limit; large harvests may be rate-limited.
+  limit: none published
+  notes: No published limit and no throttling observed.
 policies:
 - name: Backoff Strategy
-  description: Exponential backoff with jitter; honor Retry-After; harvest during off-peak hours.
+  description: >-
+    Exponential backoff with jitter and off-peak harvesting. No Retry-After is sent, so back
+    off on any non-200 rather than waiting for a hint.
+- name: User-Agent Policy
+  description: >-
+    Send a plain client User-Agent with a contact string to repository.dl.itc.u-tokyo.ac.jp;
+    a browser-shaped User-Agent returns 406 there. Send a browser-shaped User-Agent to
+    da.dl.itc.u-tokyo.ac.jp item paths. The two institution hosts require opposite settings.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

@@ -3,7 +3,12 @@ info:
   title: UTokyo Metadata Harvesting Oai Pmh API
   version: '2.0'
   summary: The two OAI-PMH 2.0 harvesting endpoints the University of Tokyo operates on its own hosts — the institutional repository and the Academic Assets Archives Portal.
-  description: "OAI-PMH is the one machine-readable interface the University of Tokyo documents publicly and\noperates itself, and it is served twice:\n\n* **UTokyo Repository** — `https://repository.dl.itc.u-tokyo.ac.jp/oai`. Identify returns\n  repositoryName \"UTokyo Repository\", adminEmail digilib@lib.u-tokyo.ac.jp, earliest\n  datestamp 2017-03-28, deletedRecord `transient`. Seven metadata formats: `jpcoar_2.0`,\n  `jpcoar`, `jpcoar_1.0`, `jpcoar_v1`, `oai_dc`, `ddi` (DDI-Codebook 2.5) and `lom`.\n* **UTokyo Academic Assets Archives Portal** — `https://da.dl.itc.u-tokyo.ac.jp/portal/oai`.\n  Identify returns repositoryName \"UTokyo Academic Archives Portal\", adminEmail\n  jitsumu_arch@lib.u-tokyo.ac.jp, earliest datestamp 2013-01-01, deletedRecord `persistent`,\n  1,957 sets. Five metadata formats: `oai_dc`, `dcndl_simple`, `dcndl_js`, `junii2`, `jpcoar`.\n  This one is documented, in Japanese only, at\n  https://da.dl.itc.u-tokyo.ac.jp/portal/help/api — the English page at\n  /portal/en/help/api says only \"Only available in Japanese\" and links across.\n\nThis document describes the protocol as these two deployments actually answer it. OAI-PMH is\na query-string verb protocol, not a REST API, so the OpenAPI shape here is a description for\ntooling, not a claim that the university publishes an OpenAPI. Responses are XML.\n\nAccess note: `repository.dl.itc.u-tokyo.ac.jp` returns HTTP 406 to requests carrying a\ndesktop-browser User-Agent and HTTP 200 to a plain client. The block is inverted from the\nusual bot challenge. Harvest it with a plain HTTP client and a real contact string, not with\na spoofed browser UA.\n"
+  description: 'OAI-PMH is the one machine-readable interface the University of Tokyo documents publicly and
+
+    operates itself, and it is served twice:
+
+
+    * **UTokyo Repository** — `https://repository.dl.itc.u-tokyo.ac.jp/oai`.'
   contact:
     name: University of Tokyo Library System — Digital Library Section
     email: digilib@lib.u-tokyo.ac.jp
@@ -14,16 +19,16 @@ servers:
 - url: https://da.dl.itc.u-tokyo.ac.jp/portal/oai
   description: UTokyo Academic Assets Archives Portal. Institution-operated.
 tags:
-- name: oai-pmh
+- name: oai pmh
   description: Open Archives Initiative Protocol for Metadata Harvesting, version 2.0.
 paths:
   /:
     get:
       operationId: oaiRequest
       summary: Issue an OAI-PMH 2.0 request
-      description: A single endpoint dispatching on the `verb` parameter, per OAI-PMH 2.0. Errors are returned inside a 200 response as an `<error>` element with an OAI-PMH error code, not as an HTTP status — this is protocol-correct and callers must parse the body.
+      description: A single endpoint dispatching on the `verb` parameter, per OAI-PMH 2.0. Errors are returned inside a 200 response as an `` element with an OAI-PMH error code, not as an HTTP status — this is protocol-correct and callers must parse the body.
       tags:
-      - oai-pmh
+      - oai pmh
       parameters:
       - name: verb
         in: query

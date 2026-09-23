@@ -4,7 +4,7 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: University of Tokyo
 providerId: university-of-tokyo
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 reconciled: false
 tags:
 - Education
@@ -13,21 +13,31 @@ tags:
 - Plans
 description: >-
   University of Tokyo is a non-commercial higher-education institution; its APIs are not sold
-  as a commercial product. Public APIs (library, repository, course, and open-metadata
-  interfaces) are offered free of charge, typically for non-commercial use. Most
-  administrative and identity APIs are not openly self-service and require institutional
-  affiliation, credentials, or federation membership rather than a paid plan.
+  as a commercial product. Its institution-operated public interfaces — two OAI-PMH endpoints, IIIF Presentation and
+  Image, the Archives Portal item representations, and the repository records JSON API — are
+  free and require no credential of any kind: no API key exists to issue and no registration
+  is offered. Reuse of the underlying material is governed per-record and per-collection by
+  the library's reuse conditions, not by a plan. There is no course, registrar or
+  student-information API at any price. Administrative services (UTOL, the HPC portal, STEP10)
+  are gated behind GakuNin SAML federation membership rather than payment.
 notes: >-
-  No published per-seat or per-call commercial pricing. "Free / Open" reflects open
+  Re-verified 2026-08-19 under the university pipeline. No published per-seat or per-call commercial pricing. "Free / Open" reflects open
   public endpoints; "Affiliation / Credentialed" reflects access gated by institutional
   identity rather than payment.
 sources:
 - https://raw.githubusercontent.com/api-evangelist/university-of-tokyo/refs/heads/main/apis.yml
+- https://da.dl.itc.u-tokyo.ac.jp/portal/help/api
+- https://www.lib.u-tokyo.ac.jp/ja/library/general/reuse
+- https://repository.dl.itc.u-tokyo.ac.jp/api/records/
+method: probed
+generated: '2026-08-19'
 plans:
 - id: university-of-tokyo-free-open
   name: Free / Open
   type: free
-  description: Public open APIs (metadata, library, repository, course data) offered at no charge, generally for non-commercial use.
+  description: >-
+    Open metadata, harvesting and image interfaces offered at no charge and with no
+    registration. Verified unauthenticated on 2026-08-19. Reuse terms are per-record.
   entries:
   - label: Open API Access
     name: open_api_access
@@ -42,7 +52,9 @@ plans:
 - id: university-of-tokyo-affiliation
   name: Affiliation / Credentialed
   type: free
-  description: Administrative and identity APIs gated behind institutional SSO, client certificates, or federation membership rather than payment.
+  description: >-
+    Administrative services gated behind the university's GakuNin-registered Shibboleth SAML
+    identity providers rather than payment. Not self-service and not obtainable externally.
   entries:
   - label: Credentialed Access
     name: credentialed_access
