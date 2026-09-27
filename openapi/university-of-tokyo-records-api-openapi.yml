@@ -105,42 +105,6 @@ paths:
                   externalValue: ../examples/university-of-tokyo-repository-record.json
 components:
   schemas:
-    RecordList:
-      type: object
-      description: Paged envelope. Observed on every 200 from /records/.
-      required:
-      - hits
-      - links
-      properties:
-        hits:
-          type: object
-          required:
-          - hits
-          - total
-          properties:
-            hits:
-              type: array
-              items:
-                $ref: '#/components/schemas/Record'
-            total:
-              type: integer
-              description: Total matching records.
-              example: 69549
-        aggregations:
-          type: object
-          description: Facet buckets. Observed empty on every probe.
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: uri
-            next:
-              type: string
-              format: uri
-            prev:
-              type: string
-              format: uri
     RecordMetadata:
       type: object
       description: JPCOAR-shaped item metadata. `_item_metadata` carries the raw WEKO item-type attribute map with Japanese `attribute_name` labels and opaque `item_<id>` keys; the sibling top-level fields are the flattened, stable view and are what a consumer should read.
@@ -272,6 +236,42 @@ components:
               format: uri
         metadata:
           $ref: '#/components/schemas/RecordMetadata'
+    RecordList:
+      type: object
+      description: Paged envelope. Observed on every 200 from /records/.
+      required:
+      - hits
+      - links
+      properties:
+        hits:
+          type: object
+          required:
+          - hits
+          - total
+          properties:
+            hits:
+              type: array
+              items:
+                $ref: '#/components/schemas/Record'
+            total:
+              type: integer
+              description: Total matching records.
+              example: 69549
+        aggregations:
+          type: object
+          description: Facet buckets. Observed empty on every probe.
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+            next:
+              type: string
+              format: uri
+            prev:
+              type: string
+              format: uri
 x-operator: institution
 x-operator-evidence: Host repository.dl.itc.u-tokyo.ac.jp is under the university's own registrable domain u-tokyo.ac.jp. OAI-PMH Identify on the same host returns repositoryName "UTokyo Repository" and adminEmail digilib@lib.u-tokyo.ac.jp. No vendor name appears in any server, title or contact. The platform (WEKO3) is open-source software from NII that the institution runs; it is not a vendor-hosted tenancy.
 x-provenance:
