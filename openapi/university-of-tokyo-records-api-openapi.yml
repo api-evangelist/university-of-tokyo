@@ -105,6 +105,33 @@ paths:
                   externalValue: ../examples/university-of-tokyo-repository-record.json
 components:
   schemas:
+    Record:
+      type: object
+      required:
+      - id
+      - created
+      - updated
+      - links
+      - metadata
+      properties:
+        id:
+          type: integer
+          description: WEKO control number as an integer.
+          example: 2003301
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+        metadata:
+          $ref: '#/components/schemas/RecordMetadata'
     RecordMetadata:
       type: object
       description: JPCOAR-shaped item metadata. `_item_metadata` carries the raw WEKO item-type attribute map with Japanese `attribute_name` labels and opaque `item_<id>` keys; the sibling top-level fields are the flattened, stable view and are what a consumer should read.
@@ -209,33 +236,6 @@ components:
         _item_metadata:
           type: object
           description: Raw WEKO item-type attribute map. Keys are deployment-specific.
-    Record:
-      type: object
-      required:
-      - id
-      - created
-      - updated
-      - links
-      - metadata
-      properties:
-        id:
-          type: integer
-          description: WEKO control number as an integer.
-          example: 2003301
-        created:
-          type: string
-          format: date-time
-        updated:
-          type: string
-          format: date-time
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: uri
-        metadata:
-          $ref: '#/components/schemas/RecordMetadata'
     RecordList:
       type: object
       description: Paged envelope. Observed on every 200 from /records/.
